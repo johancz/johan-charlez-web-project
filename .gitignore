@@ -348,3 +348,28 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Notepad automatic file backups
+nppBackup/
+
+# Visual Studio Code files
+.vscode/
+workspace.code-workspace
+
+
+
+
+
+
+
+
+
+
+# maybe temporary
+.eslintrc.json
+package.json
+package-lock.json
+
+# dist/
+docs/cards.md
+src/easterEgg/
