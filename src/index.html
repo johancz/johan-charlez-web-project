@@ -4,10 +4,102 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
-  <title>Document</title>
+  <link rel="stylesheet" href="easterEgg/easterEgg.css">
+  <title>Web Development frontend - Project - Johan Charlez</title>
 </head>
 <body>
+  <div id="root-container"><!-- todo(joch): maybe remove the "id" -->
+    <!-- start of header -->
+    <header>
+      <nav id="nav-main">
+        <ol>
+          <li data-menuitem="Home">Home</li>
+          <li data-menuitem="AboutTheDeveloper">About the developer</li>
+          <li data-menuitem="Login">Login</li>
+        </ol>
+      </nav>
+
+      <h1>Web Development frontend - Project - Johan Charlez</h1>
+    </header>
+    <!-- end of header -->
+
+    <!-- start of main -->
+    <main>
+      <section id="page-home">
+        <h2>Home</h2>
+        <section>
+          <h3>Welcome...</h3>
+          <p>... to the final project in the "Web Development frontend" course in the "</p>
+        </section>
+        <section>
+          <h3>Project ideas:</h3>
+          <dl id="list-of-project-ideas">
+            <dt>Random location on Google Earth</dt>
+            <dd>Using Google Earth's API, randomize a location on earth and display it with an embed?</dd>
+          </dl>
+        </section>
+      </section>
+      <section id="page-about-developer" class="hidden">
+        <h2>About the developer</h2>
+        <img src=".\images\developer.jpeg" alt="Photo of the handsome developer." title="The developer 'Johan Charlez'">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, sed! Molestias voluptates voluptate, nostrum facilis vero quae voluptas consectetur qui praesentium, eveniet amet delectus adipisci? Officia quisquam natus hic perferendis.
+        </p>
+      </section>
+      <section id="page-main-contents" class="hidden">
+        <h2>Main Contents</h2>
+        <section id="section-login">
+          <form>
+            <fieldset>
+              <legend>Login with _____</legend>
+
+              <label>Username:
+                <input type="text">
+              </label>
+              <label>Password:
+                <input type="password">
+              </label>
+
+              <div>
+                <button type="submit">Login</button>
+                <hr class="vertical">
+                or
+                <hr class="vertical">
+                <button type="button">Register</button>
+              </div>
+            </fieldset>
+          </form>
+        </section>
+        <section id="section-signedIn">
+          <h3>Welcome _____</h3>
+          <div id="api-content-container">
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro reiciendis provident exercitationem distinctio, consequatur voluptate reprehenderit voluptatem inventore repellendus rem possimus id. Unde quibusdam mollitia quae expedita saepe velit perspiciatis?</p>
+          </div>
+        </section>
+        <section id="section-signedOut">
+          <h3>You've signed out.</h3>
+          <p>Farewell friend!</p>
+        </section>
+        
+        <!-- Easter Egg -->
+        <div id="fake-terminal-container" class="hidden"><!-- todo(joch): maybe remove the "id" -->
+          <input type="text" placeholder="Enter a command..." name="fake-terminal" id="fake-terminal">
+        </div>
+      </section>
+    </main>
+    <!-- end of main -->
+
+    <!-- start of footer -->
+    <footer>
+      Johan Charlez, 2021
+      <br>
+      Final Project in the course Webdevelopment frontend in the <a href="https://teknikhogskolan.se/utbildningar/net-utvecklare/">".NET-developer"-programme</a> @ <a href="https://teknikhogskolan.se/">Teknikhögskolan</a>.
+    </footer>
+    <!-- start of footer -->
+  </div>
+  <!-- end of #root-container -->
   
   <script src="scripts.js" defer></script>
+  <!-- <script src="easterEgg/easterEgg.js" defer></script> --><!-- You did not see this. -->
 </body>
 </html>

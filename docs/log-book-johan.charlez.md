@@ -1,12 +1,12 @@
 # Log Book - johan.charlez
 ## 2021-02-16 kl.10.28
-- [ ] Create an initial project plan.
-  - Create project-cards and issues on Github.
+- [x] Create an initial project plan.
+  - [x] Create project-cards and issues on Github.
     - For example, should the website be a single-page or a multi-page application? (this can be decided upon at a later date)
-- [ ] Create simple mockups (with HTML, CSS and JavaScript) which can server as the base for further development.
-  - [ ] Mockup the landing-page.
-  - [ ] Mockup the "about the developer"-page.
-  - [ ] If time permits, mockup the page users gain access to after signing in.
+- [x] Create simple mockups (with HTML, CSS and JavaScript) which can serve as the base for further development.
+  - [x] Mockup the landing-page.
+  - [x] Mockup the "about the developer"-page.
+  - [x] If time permits, mockup the page users gain access to after signing in.
 ## 2021-02-13 kl.16.01
 - [x] Read the project specification.
 ## 2021-02-11

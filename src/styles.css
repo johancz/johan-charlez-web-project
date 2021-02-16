@@ -1,0 +1,108 @@
+/********************/
+/* Resets and Setup */
+/********************/
+
+:root {
+  --separator-color: orangered;
+}
+
+/* partial css "reset" */
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+/******************/
+/* General styles */
+/******************/
+
+.hidden {
+  display: none;
+}
+
+/***************************/
+/* Element specific styles */
+/***************************/
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: lightgray;
+}
+hr.vertical {
+  display: inline;
+  margin: 0 8px;
+  box-sizing: content-box;
+  width: 1px;
+  border: 0;
+  border-left: 1px solid var(--separator-color);
+}
+
+fieldset {
+  border-color: var(--separator-color);
+  padding: 20px;
+}
+fieldset::before {
+  /* todo(joch): This message should pop up when the wrong login information is entered. Unless the identity-provider/SSO used already provides similar. */
+  content: "One does not simply walk into the restricted areas. Please enter correct login-data to proceed.";
+  top: calc(1em + 15px);
+  padding: 10px;
+  background-color: pink;
+  display: block;
+}
+legend {
+  font-size: 1.5em;
+}
+
+#root-container {
+  min-width: 360px;
+  max-width: 100%;
+  width: 1200px;
+  /* height: 100%; */
+  margin: 0 auto;
+  background-color: white;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  border: 5px solid green;/* note(joch): for debugging *//* todo(joch): remove */
+}
+
+/* todo(joch): temp? */
+#list-of-project-ideas {
+  display: list-item;
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+/*** Main Menu ***/
+#nav-main {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 2em;
+  text-align: center;
+}
+#nav-main li {
+  display: inline-block;
+  list-style: none;
+  padding: 10px;
+}
+#nav-main li:not(:first-child) {
+  border-left: 1px solid var(--separator-color);
+}
+#nav-main:hover {
+  cursor: pointer;
+}
+#nav-main li:hover {
+  text-shadow: 0 0 2px var(--separator-color);
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  margin-top: 10px;
+  border-top: 5px solid gray;
+}
