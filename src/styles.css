@@ -106,3 +106,8 @@ footer {
   margin-top: 10px;
   border-top: 5px solid gray;
 }
+
+/* note(joch): temporary? */
+.okta-sign-in-header.auth-header {
+  display: none;
+}

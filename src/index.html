@@ -3,9 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="easterEgg/easterEgg.css">
   <title>Web Development frontend - Project - Johan Charlez</title>
+  <!-- <link rel="preconnect" href="https://fonts.gstatic.com"> -->
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">  -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- <link rel="stylesheet" href="easterEgg/easterEgg.css"> -->
+
+  <!-- Okta - widget stuff here -->
+  <script src="https://global.oktacdn.com/okta-signin-widget/5.1.5/js/okta-sign-in.min.js" type="text/javascript"></script>
+  <link href="https://global.oktacdn.com/okta-signin-widget/5.1.5/css/okta-sign-in.min.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
   <div id="root-container"><!-- todo(joch): maybe remove the "id" -->
@@ -49,7 +55,7 @@
       <section id="page-main-contents" class="hidden">
         <h2>Main Contents</h2>
         <section id="section-login">
-          <form>
+          <!-- <form>
             <fieldset>
               <legend>Login with _____</legend>
 
@@ -68,18 +74,15 @@
                 <button type="button">Register</button>
               </div>
             </fieldset>
-          </form>
-        </section>
-        <section id="section-signedIn">
-          <h3>Welcome _____</h3>
-          <div id="api-content-container">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro reiciendis provident exercitationem distinctio, consequatur voluptate reprehenderit voluptatem inventore repellendus rem possimus id. Unde quibusdam mollitia quae expedita saepe velit perspiciatis?</p>
-          </div>
-        </section>
-        <section id="section-signedOut">
-          <h3>You've signed out.</h3>
-          <p>Farewell friend!</p>
-        </section>
+          </form> -->
+
+        <!-- Okta - where the sign-in form will be displayed -->
+        <div id="okta-login-container"></div>
+
+        <div id="logged-in" class="hidden">
+          <h3>Logged in</h3>
+          <button id="logout" class="button hidden">Logout</button>
+        </div>
         
         <!-- Easter Egg -->
         <div id="fake-terminal-container" class="hidden"><!-- todo(joch): maybe remove the "id" -->
@@ -100,6 +103,7 @@
   <!-- end of #root-container -->
   
   <script src="scripts.js" defer></script>
+  <script src="okta.js" defer></script>
   <!-- <script src="easterEgg/easterEgg.js" defer></script> --><!-- You did not see this. -->
 </body>
 </html>
