@@ -4,6 +4,8 @@
 
 :root {
   --separator-color: orangered;
+  --hex-pattern-background-color: rgb(236, 235, 235);
+  --hex-pattern-border-color: rgb(212, 212, 212);
 }
 
 /* partial css "reset" */
@@ -29,7 +31,7 @@ html, body {
 }
 
 body {
-  background-color: lightgray;
+  background-color: whitesmoke;
 }
 hr.vertical {
   display: inline;
@@ -38,6 +40,14 @@ hr.vertical {
   width: 1px;
   border: 0;
   border-left: 1px solid var(--separator-color);
+}
+
+p {
+  margin: 10px 0;
+}
+
+main {
+  padding: 20px;
 }
 
 fieldset {
@@ -63,11 +73,12 @@ legend {
   /* height: 100%; */
   margin: 0 auto;
   background-color: white;
-  padding: 10px;
+  /* padding: 10px; */
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  border: 5px solid green;/* note(joch): for debugging *//* todo(joch): remove */
+  /* note(joch): for debugging *//* todo(joch): remove */
+  /* border: 5px solid green;*/
 }
 
 /* todo(joch): temp? */
@@ -77,25 +88,58 @@ legend {
   margin-left: 20px;
 }
 
+
+header {
+  background-image: url("./resources/background-images/89baaec3227c63044d8d715b7388f8b7.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-bottom: 10px;
+}
+nav {
+  
+  position: relative;
+}
+nav:after {
+  pointer-events: none;
+  position: absolute;
+  content: "";
+  /* background: linear-gradient(rgba(0,0,0,0.25) 50%, rgba(0,0,0,0)); */
+  background: rgba(0,0,0,0.25);
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
 /*** Main Menu ***/
 #nav-main {
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  font-size: 2em;
+  /* font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 1.5em;
   text-align: center;
+  color: white;
+}
+#nav-main ol {
+  padding-left: 0;
 }
 #nav-main li {
   display: inline-block;
   list-style: none;
-  padding: 10px;
+  padding: 5px;
+  position: relative;
+  z-index: 2;
 }
-#nav-main li:not(:first-child) {
-  border-left: 1px solid var(--separator-color);
-}
+/* #nav-main li:not(:first-child) { */
+  /* border-left: 1px solid var(--separator-color); */
+/* } */
 #nav-main:hover {
   cursor: pointer;
 }
 #nav-main li:hover {
-  text-shadow: 0 0 2px var(--separator-color);
+  /* text-shadow: 0 0 20px var(--separator-color); */
+  text-shadow: 0 0 5px white;
+  transition: text-shadow 1s;
 }
 
 main {
@@ -103,11 +147,59 @@ main {
 }
 
 footer {
-  margin-top: 10px;
-  border-top: 5px solid gray;
+  padding: 10px;
+  /* margin-top: 10px; */
+  border-top: 5px solid rgb(185, 185, 185);
+}
+
+/* Headers */
+h1, h2, h3 {
+  margin: 10px 0;
+  font-family: 'Roboto', sans-serif;
+}
+h1 {
+  text-align: center;
+  font-weight: 100;
+}
+
+h2, h3 {
+  font-weight: 300;
+}
+h1::first-letter {
+  font-weight: 300;
+  color: var(--separator-color);
+}
+h2::first-letter, h3::first-letter {
+  font-weight: 400;
+  color: var(--separator-color);
+}
+
+#logo {
+  padding: 10px;
+  /* overflow: hidden; */
+}
+
+span {
+  display: inline-block;
+}
+
+#random-fox {
+  /* float: right; */
+  max-width: 100%;
 }
 
 /* note(joch): temporary? */
 .okta-sign-in-header.auth-header {
   display: none;
+}
+
+
+/*****************/
+/* Media Queries */
+/*****************/
+
+@media only screen and (max-width: 400px) {
+  #nav-main li {
+    display: block;
+  }
 }
