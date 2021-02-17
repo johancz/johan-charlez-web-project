@@ -1,4 +1,17 @@
 # Log Book - johan.charlez
+## 2021-02-17 kl.20:55
+  - I started by updating the styling of the header a little.
+  - I got sidetracked early on with trying to figure out how to get Okta up and running. Quite a few of my peers were trying to figure out how to implement Okta on Discord, so I decided to join in on this group effort.
+    - Svetlana in my class managed to get it working early on using a [guide](https://developer.okta.com/blog/2018/06/08/add-authentication-to-any-web-page-in-10-minutes) and she helped others (including me) by answering questions and posting screenshots of her configuration.
+    Alas I could not reproduce her success.
+    - In the end I managed to get some code to work "on localhost" by following a different [guide](https://developer.okta.com/code/javascript/okta_sign-in_widget/).
+      - The two guides were either incomplete or out of date, but by using both I managed to figure something out in the end.
+      - I posted a small guide of sorts on discord with the steps I took to solve it.
+  - I spoke briefly to a couple of peers about Okta, CSS and APIs, discussing our progress and some problems that got in our way.
+  - And finally I managed to implement a small API (which serves a random picture of a fox) using AJAX.
+## 2021-02-17 kl.09:06
+- Yesterday I managed to complete the tasks I set for myself in this log-book, including the extra goals.
+- The plan for today is to experiment with APIs, and iterate upon the existing (faux SPA) markup and styles, and maybe look at Okta briefly.
 ## 2021-02-16 kl.10.28
 - [x] Create an initial project plan.
   - [x] Create project-cards and issues on Github.
