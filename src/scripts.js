@@ -61,21 +61,28 @@
   /* Api Stuff */
 
   function getRandomFox() {
-    // Call the API.
-    // Create and send the request.
-    let request = new XMLHttpRequest();
-    request.open("GET", "https://randomfox.ca/floof/", true);
-
-    // Listen for a response to our request.
-    request.onload = function() {
-      // Check for success.
-      if (this.status === 200) {
-        let data = JSON.parse(this.response);
-        console.log(data);
-        $randomFoxImage.src = data.image;
-      }
-    }
-    request.send();
+    // // Call the API.
+    // // Create and send the request.
+    // let request = new XMLHttpRequest();
+    // request.open("GET", "https://randomfox.ca/floof/", true);
+  
+    // // Listen for a response to our request.
+    // request.onload = function() {
+    //   // Check for success.
+    //   if (this.status === 200) {
+    //     let data = JSON.parse(this.response);
+    //     console.log(data);
+    //     $randomFoxImage.src = data.image;
+    //   }
+    // }
+    // request.send();
+  
+    fetch("https://randomfox.ca/floof/").then(response => {
+      response.json().then(data => {
+      console.log(data);
+      $randomFoxImage.src = data.image;
+      });
+    });
   }
 
   function initContent() {
