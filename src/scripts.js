@@ -11,6 +11,7 @@
   };
   const $getRandomFoxButton = document.getElementById("get-random-fox");
   const $randomFoxImage = document.getElementById("random-fox");
+  const $mainContainer = document.getElementsByTagName("main")[0];
 
   /*
   e: the Event
@@ -21,19 +22,26 @@
     // Show the correct page and hide the rest.
     switch (e.target.dataset.menuitem) {
       case "Home":
-        $pages["about-developer"].classList.add("hidden");
-        $pages["main-contents"].classList.add("hidden");
-        $pages.home.classList.remove("hidden");
+        // $pages["about-developer"].classList.add("hidden");
+        // $pages["main-contents"].classList.add("hidden");
+        // $pages.home.classList.remove("hidden");
         break;
       case "AboutTheDeveloper":
-        $pages.home.classList.add("hidden");
-        $pages["main-contents"].classList.add("hidden");
-        $pages["about-developer"].classList.remove("hidden");
+        fetch("./aboutDeveloper.html").then(response => {
+          console.log(response);
+          response.text().then(data => {
+            console.log(data);
+            $mainContainer.innerHTML = data;
+          });
+        });
+        // $pages.home.classList.add("hidden");
+        // $pages["main-contents"].classList.add("hidden");
+        // $pages["about-developer"].classList.remove("hidden");
         break;
       case "Login":
-        $pages.home.classList.add("hidden");
-        $pages["about-developer"].classList.add("hidden");
-        $pages["main-contents"].classList.remove("hidden");
+        // $pages.home.classList.add("hidden");
+        // $pages["about-developer"].classList.add("hidden");
+        // $pages["main-contents"].classList.remove("hidden");
         break;
       default:
         console.error(`The "${e.target.dataset.menuitem}"-menuitem was unexpected. It does not have a corresponding "page".`);
@@ -60,9 +68,9 @@
 
   /* Api Stuff */
 
-  function getRandomFox() {
-    // // Call the API.
-    // // Create and send the request.
+  // function getRandomFox() {
+    // Call the API.
+    // Create and send the request.
     // let request = new XMLHttpRequest();
     // request.open("GET", "https://randomfox.ca/floof/", true);
   
@@ -77,26 +85,26 @@
     // }
     // request.send();
   
-    fetch("https://randomfox.ca/floof/").then(response => {
-      response.json().then(data => {
-      console.log(data);
-      $randomFoxImage.src = data.image;
-      });
-    });
-  }
+  //   fetch("https://randomfox.ca/floof/").then(response => {
+  //     response.json().then(data => {
+  //       console.log(data);
+  //       $randomFoxImage.src = data.image;
+  //     });
+  //   });
+  // }
 
-  function initContent() {
-    getRandomFox();
-    $getRandomFoxButton.addEventListener("click", getRandomFox, false);
-    $getRandomFoxButton.disabled = false;
-  }
+  // function initContent() {
+  //   getRandomFox();
+  //   $getRandomFoxButton.addEventListener("click", getRandomFox, false);
+  //   $getRandomFoxButton.disabled = false;
+  // }
 
   /* Main */
 
   function main() {
     console.log("initiated");
     $mainMenu.addEventListener("click", handleEvent, false);
-    initContent();
+    // initContent();
   }
 
   main();
