@@ -8,7 +8,24 @@
     authParams: {
       issuer: "https://dev-75535493.okta.com/oauth2/default"
     },
-    redirectUri: "http://localhost:8080"
+    redirectUri: "http://localhost:8080",
+    registration: {
+      parseSchema: function(schema, onSuccess, onFailure) {
+         // handle parseSchema callback
+         onSuccess(schema);
+      },
+      preSubmit: function (postData, onSuccess, onFailure) {
+         // handle preSubmit callback
+         onSuccess(postData);
+      },
+      postSubmit: function (response, onSuccess, onFailure) {
+          // handle postsubmit callback
+         onSuccess(response);
+      }
+    },
+    features: {
+      registration:true
+    },
   });
 
   oktaSignIn.authClient.token.getUserInfo().then(function (user) {
@@ -16,6 +33,7 @@
     // temporary solution:
     // show logged-in <div>
     $loggedInContainer.classList.remove("hidden");
+    document.getElementById("messageBox").innerHTML = "Hello, " + user.email + "! You are *still* logged in! :)";
   }, function (error) {
     oktaSignIn.showSignInToGetTokens({
       el: '#okta-login-container'
@@ -27,6 +45,7 @@
       $logOutButton.style.display = 'block';
       // temporary solution:
       // show logged-in <div>
+      document.getElementById("messageBox").innerHTML = "Hello, " + idToken.claims.email + "! You just logged in! :)";
       $loggedInContainer.classList.remove("hidden");
 
     }).catch(function (err) {
