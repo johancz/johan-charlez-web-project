@@ -55,7 +55,7 @@
       // First request and display a fox picture, and then enabled the button so that the user can request a new picture.
       this.getAndDisplayFox();
       this.$getRandomFoxButton.addEventListener("click", this, false);
-      this.$getRandomFoxButton.disabled = false;
+      // this.$getRandomFoxButton.disabled = false;
     }
   };
 
