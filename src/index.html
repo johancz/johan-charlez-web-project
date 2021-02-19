@@ -23,16 +23,20 @@
       
       <nav id="nav-main">
         <ol>
-          <li data-menuitem="Home">Home</li>
-          <li data-menuitem="AboutTheDeveloper">About the developer</li>
-          <li data-menuitem="Login">Login</li>
+          <!-- todo(joch): change "data-menuitem" to class? -->
+          <!-- "<a href" is a fallback of sorts if the user does not have JavaScript enabled. -->
+          <li><a data-page="index.html" data-menuitem="Home" href="index.html">Home</a></li>
+          <li><a data-page="aboutDeveloper.html" data-menuitem="AboutTheDeveloper" href="./pages/aboutDeveloper.html">About the developer</a></li>
+          <li><a data-page="login.html" data-page-scripts='["./pages/scripts/login.js"]' data-menuitem="Login" href="./pages/login.html">Login</a></li>
+          <!-- <li data-page="AboutTheDeveloper" data-menuitem="AboutTheDeveloper">About the developer</li> -->
+          <!-- <li data-page="Login" data-menuitem="Login">About the developer</li> -->
         </ol>
       </nav>
     </header>
     <!-- end of header -->
 
     <!-- start of main -->
-    <main>
+    <main id="container-homepage">
       <section id="page-home">
         <h2>Home</h2>
         <section>
@@ -48,6 +52,8 @@
         </section>
       </section>
     </main>
+    <main id="container-other-pages">
+    </main>
     <!-- end of main -->
 
     <!-- start of footer -->
@@ -61,7 +67,8 @@
   <!-- end of #root-container -->
   
   <script src="scripts.js" defer></script>
-  <!-- <script src="okta.js" defer></script> -->
+  <!-- <script src="login.js" defer></script> -->
+  <div id="page-scripts"></div>
   <!-- <script src="easterEgg/easterEgg.js" defer></script> --><!-- You did not see this. -->
 </body>
 </html>

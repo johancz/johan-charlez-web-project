@@ -30,6 +30,15 @@ html, body {
   height: 100%;
 }
 
+html {
+  /*
+  The following two lines stop the contents of the page from moving horizontally when a scrollbar on <body> is toggled.
+    - source: https://aykevl.nl/2014/09/fix-jumping-scrollbar
+  */
+  margin-left: calc(100vw - 100%);
+  margin-right: 0;
+}
+
 body {
   background-color: whitesmoke;
 }
@@ -126,9 +135,13 @@ nav:after {
 #nav-main li {
   display: inline-block;
   list-style: none;
-  padding: 5px;
   position: relative;
   z-index: 2;
+}
+#nav-main li > a {
+  text-decoration: none;
+  color: inherit;
+  padding: 5px;
 }
 /* #nav-main li:not(:first-child) { */
   /* border-left: 1px solid var(--separator-color); */
