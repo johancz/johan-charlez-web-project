@@ -2,46 +2,66 @@
   "use strict";
   var oktaSignIn;
 
-  // the '$'-prefix denotes an html element, or collection/array/object of such.
+  // the '$'-prefix denotes that the variable is an html element, or collection/array/object of/with such.
   const $mainMenu = document.getElementById("nav-main");
+
+  /* Pages */
   const $pages = {
     "home": document.getElementById("page-home"),
     "about-developer": document.getElementById("page-about-developer"),
     "main-contents": document.getElementById("page-main-contents")
   };
-  const $getRandomFoxButton = document.getElementById("get-random-fox");
-  const $randomFoxImage = document.getElementById("random-fox");
-  const $mainContainer = document.getElementsByTagName("main")[0];
+  const [ $mainContainer, $mainOtherPages ] = document.getElementsByTagName("main");
+  const $pageScriptsContainer = document.getElementById("page-scripts");
+
+  /* Random Fox API */
+
+  if ($mainContainer === null || $mainOtherPages === null) {
+    console.error("Missing vital markup, aborting.")
+    return;
+  }
 
   /*
   e: the Event
   */
   function handleClick_mainMenu(e) {
-    console.log("clicked menu", e.target.dataset.menuitem);
+    e.preventDefault();
+    console.log("clicked menu", e.target.dataset);
 
     // Show the correct page and hide the rest.
     switch (e.target.dataset.menuitem) {
       case "Home":
-        // $pages["about-developer"].classList.add("hidden");
-        // $pages["main-contents"].classList.add("hidden");
-        // $pages.home.classList.remove("hidden");
+        while ($mainOtherPages.firstChild !== null) {
+          $mainOtherPages.removeChild($mainOtherPages.firstChild);
+        }
+        $mainOtherPages.classList.add("hidden");
+        $mainContainer.classList.remove("hidden");
         break;
       case "AboutTheDeveloper":
-        fetch("./aboutDeveloper.html").then(response => {
-          console.log(response);
+      case "Login":
+        // Remove old page scripts:
+        while ($pageScriptsContainer.firstChild !== null) {
+          $pageScriptsContainer.removeChild($pageScriptsContainer.firstChild);
+        }
+
+        fetch(e.target.href).then(response => {
           response.text().then(data => {
-            console.log(data);
-            $mainContainer.innerHTML = data;
+            $mainOtherPages.innerHTML = data;
+
+            // Once the new page has been added to the DOM, load its' scripts (if any).
+            if (e.target.dataset.pageScripts) {
+              for (let scriptPath of JSON.parse(e.target.dataset.pageScripts)) {
+                let $script = document.createElement("script");
+                $script.type = "text/javascript";
+                $script.src = scriptPath;
+                $pageScriptsContainer.appendChild($script);
+              } 
+            }
+            
+            $mainContainer.classList.add("hidden");
+            $mainOtherPages.classList.remove("hidden");
           });
         });
-        // $pages.home.classList.add("hidden");
-        // $pages["main-contents"].classList.add("hidden");
-        // $pages["about-developer"].classList.remove("hidden");
-        break;
-      case "Login":
-        // $pages.home.classList.add("hidden");
-        // $pages["about-developer"].classList.add("hidden");
-        // $pages["main-contents"].classList.remove("hidden");
         break;
       default:
         console.error(`The "${e.target.dataset.menuitem}"-menuitem was unexpected. It does not have a corresponding "page".`);
@@ -66,46 +86,9 @@
     }
   }
 
-  /* Api Stuff */
-
-  // function getRandomFox() {
-    // Call the API.
-    // Create and send the request.
-    // let request = new XMLHttpRequest();
-    // request.open("GET", "https://randomfox.ca/floof/", true);
-  
-    // // Listen for a response to our request.
-    // request.onload = function() {
-    //   // Check for success.
-    //   if (this.status === 200) {
-    //     let data = JSON.parse(this.response);
-    //     console.log(data);
-    //     $randomFoxImage.src = data.image;
-    //   }
-    // }
-    // request.send();
-  
-  //   fetch("https://randomfox.ca/floof/").then(response => {
-  //     response.json().then(data => {
-  //       console.log(data);
-  //       $randomFoxImage.src = data.image;
-  //     });
-  //   });
-  // }
-
-  // function initContent() {
-  //   getRandomFox();
-  //   $getRandomFoxButton.addEventListener("click", getRandomFox, false);
-  //   $getRandomFoxButton.disabled = false;
-  // }
-
-  /* Main */
-
-  function main() {
-    console.log("initiated");
+  // Self-invoking "main"-function.
+  (function main() {
     $mainMenu.addEventListener("click", handleEvent, false);
     // initContent();
-  }
-
-  main();
+  }());
 }());
