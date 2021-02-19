@@ -1,4 +1,10 @@
 # Log Book - johan.charlez
+## 2021-02-19 kl.22:48
+  - Complete most the convertion from "faux" SPA to something closer to a real SPA. Can you make a real single-page application without a backend component?
+    - There are things left to do, such as:
+      - I need to clean up the code.
+      - The login markup and logic should probaby be moved to "./src/index.html" and "./src/script.js" respectively. And present the sign-in and sign-up forms in a modal window/popup.
+  - Found some API candidates and a guide to get Github Pages up an running.
 ## 2021-02-18 kl.22:56
   - New information from Adam Brodin that self registration in the Okta widget is infact possible, contrary to what the documentation tells you. This got me started on a side-track as I decided to implement this feature. It wasn't difficult, essentially only requiring two buttons clicks in Okta's admin-interface, and the addition of a few lines of configuration in "src/okta.js".
   - I played with the Fetch API briefly, by changing the random-fox implementation to use Fetch instead of XMLHttpRequest.
