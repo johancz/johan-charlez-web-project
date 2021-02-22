@@ -19,3 +19,6 @@
 - https://opendata.smhi.se/apidocs/
 - Google Earth
 - https://ghibliapi.herokuapp.com/
+
+## Fonts
+- https://github.com/ryanoasis/nerd-fonts
