@@ -20,6 +20,7 @@
 - Google Earth
   - example: https://random.earth/
   - alternative to Google Eath? https://gist.github.com/oliveratgithub/eb4a33db70b258120eac
+  - https://earthview.withgoogle.com/
 - https://ghibliapi.herokuapp.com/
 - https://api.le-systeme-solaire.net/en/
 
