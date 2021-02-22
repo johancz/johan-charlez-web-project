@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Web Development frontend - Project - Johan Charlez</title>
+  <title>Random Fox Photos</title>
   <!-- <link rel="preconnect" href="https://fonts.gstatic.com"> -->
   <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">  -->
   <link rel="stylesheet" href="styles.css">
@@ -18,21 +18,25 @@
     <!-- start of header -->
     <header>
       <div id="logo">
-        <h1><span>Web Development frontend</span><span> - Project - Johan Charlez</span></h1>
+        <h1>Random <span>Fox</span> Photos</h1>
       </div>
       
       <nav id="nav-main">
         <ol>
-          <li data-menuitem="Home">Home</li>
-          <li data-menuitem="AboutTheDeveloper">About the developer</li>
-          <li data-menuitem="Login">Login</li>
+          <!-- todo(joch): change "data-menuitem" to class? -->
+          <!-- "<a href" is a fallback of sorts if the user does not have JavaScript enabled. -->
+          <li><a data-page="index.html" data-menuitem="Home" href="index.html">Home</a></li>
+          <li><a data-page="aboutDeveloper.html" data-menuitem="AboutTheDeveloper" href="./pages/aboutDeveloper.html">About the developer</a></li>
+          <li><a data-page="login.html" data-page-scripts='["./pages/scripts/login.js"]' data-menuitem="Login" href="./pages/login.html">Login</a></li>
+          <!-- <li data-page="AboutTheDeveloper" data-menuitem="AboutTheDeveloper">About the developer</li> -->
+          <!-- <li data-page="Login" data-menuitem="Login">About the developer</li> -->
         </ol>
       </nav>
     </header>
     <!-- end of header -->
 
     <!-- start of main -->
-    <main>
+    <main id="container-homepage">
       <section id="page-home">
         <h2>Home</h2>
         <section>
@@ -47,59 +51,8 @@
           </dl>
         </section>
       </section>
-      <section id="page-about-developer" class="hidden">
-        <h2>About the developer</h2>
-        <img src=".\images\developer.jpeg" alt="Photo of the handsome developer." title="The developer 'Johan Charlez'">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, sed! Molestias voluptates voluptate, nostrum facilis vero quae voluptas consectetur qui praesentium, eveniet amet delectus adipisci? Officia quisquam natus hic perferendis.
-        </p>
-      </section>
-      <section id="page-main-contents" class="hidden">
-        <h2>Main Contents</h2>
-        <section id="section-login">
-          <!-- <form>
-            <fieldset>
-              <legend>Login with _____</legend>
-
-              <label>Username:
-                <input type="text">
-              </label>
-              <label>Password:
-                <input type="password">
-              </label>
-
-              <div>
-                <button type="submit">Login</button>
-                <hr class="vertical">
-                or
-                <hr class="vertical">
-                <button type="button">Register</button>
-              </div>
-            </fieldset>
-          </form> -->
-
-        <!-- Okta - where the sign-in form will be displayed -->
-        <div id="okta-login-container">
-          okta-messages:
-          <div id="messageBox" class="jumbotron">
-        </div>
-
-        <div id="logged-in" class="hidden">
-          <h3>Logged in</h3>
-          <button id="logout" class="button hidden">Logout</button>
-          <h3>Project Random Fox</h3>
-          <p>You click the button, I give you a random fox, deal?</p>
-          <button id="get-random-fox" disabled>Fox it up please!</button>
-          <br>
-          <img src="//:0" id="random-fox" alt="Picture of a random fox" title="Picture of a random fox">
-          <p><b>P.S.</b> Is this a random picture of a fox, a picure of a random fox, or a random picture of a random fox? You decide.</p>
-        </div>
-        
-        <!-- Easter Egg -->
-        <div id="fake-terminal-container" class="hidden"><!-- todo(joch): maybe remove the "id" -->
-          <input type="text" placeholder="Enter a command..." name="fake-terminal" id="fake-terminal">
-        </div>
-      </section>
+    </main>
+    <main id="container-other-pages">
     </main>
     <!-- end of main -->
 
@@ -114,7 +67,8 @@
   <!-- end of #root-container -->
   
   <script src="scripts.js" defer></script>
-  <script src="okta.js" defer></script>
+  <!-- <script src="login.js" defer></script> -->
+  <div id="page-scripts"></div>
   <!-- <script src="easterEgg/easterEgg.js" defer></script> --><!-- You did not see this. -->
 </body>
 </html>

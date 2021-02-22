@@ -2,50 +2,78 @@
   "use strict";
   var oktaSignIn;
 
-  // the '$'-prefix denotes an html element, or collection/array/object of such.
+  // the '$'-prefix denotes that the variable is an html element, or collection/array/object of/with such.
   const $mainMenu = document.getElementById("nav-main");
+
+  /* Pages */
   const $pages = {
     "home": document.getElementById("page-home"),
     "about-developer": document.getElementById("page-about-developer"),
     "main-contents": document.getElementById("page-main-contents")
   };
-  const $getRandomFoxButton = document.getElementById("get-random-fox");
-  const $randomFoxImage = document.getElementById("random-fox");
+  const [$mainContainer, $mainOtherPages] = document.getElementsByTagName("main");
+  const $pageScriptsContainer = document.getElementById("page-scripts");
 
-  /*
-  e: the Event
-  */
-  function handleClick_mainMenu(e) {
-    console.log("clicked menu", e.target.dataset.menuitem);
+  if ($mainContainer === null || $mainOtherPages === null) {
+    console.error("Missing vital markup, aborting.")
+    return;
+  }
+
+  async function handleClick_mainMenu(e) {
+    // Stop the browser from loading 'e.target.href'.
+    e.preventDefault();
 
     // Show the correct page and hide the rest.
     switch (e.target.dataset.menuitem) {
       case "Home":
-        $pages["about-developer"].classList.add("hidden");
-        $pages["main-contents"].classList.add("hidden");
-        $pages.home.classList.remove("hidden");
+        while ($mainOtherPages.firstChild !== null) {
+          $mainOtherPages.removeChild($mainOtherPages.firstChild);
+        }
+        $mainOtherPages.classList.add("hidden");
+        $mainContainer.classList.remove("hidden");
         break;
       case "AboutTheDeveloper":
-        $pages.home.classList.add("hidden");
-        $pages["main-contents"].classList.add("hidden");
-        $pages["about-developer"].classList.remove("hidden");
+      case "Login": {
+        // Remove old page scripts:
+        while ($pageScriptsContainer.firstChild !== null) {
+          $pageScriptsContainer.removeChild($pageScriptsContainer.firstChild);
+        }
+
+        // Fetch the page.
+        let requestPage = await fetch(e.target.href);
+        // Success, await the data and insert the page's markup.
+        let requestData = await requestPage.text();
+        $mainOtherPages.innerHTML = requestData;
+
+        // Once the new page has been added to the DOM, load its' scripts (if any).
+        if ("pageScripts" in e.target.dataset) {
+          for (let scriptPath of JSON.parse(e.target.dataset.pageScripts)) {
+
+            // Fetch all of the page's script-files using provided scriptPaths.
+            let requestPage = await fetch(scriptPath);
+
+            // Success, await the data and add the scripts to <body>/$pageScriptsContainer.
+            let requestData = await requestPage.text();
+            let $script = document.createElement("script");
+            $script.type = "text/javascript";
+            $script.textContent = requestData;
+            $pageScriptsContainer.appendChild($script);
+          }
+        }
+
+        // Hide the "Home"-page and show the fetched page.
+        $mainContainer.classList.add("hidden");
+        $mainOtherPages.classList.remove("hidden");
         break;
-      case "Login":
-        $pages.home.classList.add("hidden");
-        $pages["about-developer"].classList.add("hidden");
-        $pages["main-contents"].classList.remove("hidden");
-        break;
+      } // end of 'case: "Login"'
       default:
         console.error(`The "${e.target.dataset.menuitem}"-menuitem was unexpected. It does not have a corresponding "page".`);
         break;
     }
   }
 
-  /*
-  e: the Event
-  */
+  // note(joch): If there is only one event to handle, remove this function and reference the 'handleClick_mainMenu'-callback directly?
   function handleEvent(e) {
-    console.log(e);
     switch (e.type) {
       case "click":
         if (e.currentTarget.id === "nav-main") {
@@ -58,46 +86,9 @@
     }
   }
 
-  /* Api Stuff */
-
-  function getRandomFox() {
-    // // Call the API.
-    // // Create and send the request.
-    // let request = new XMLHttpRequest();
-    // request.open("GET", "https://randomfox.ca/floof/", true);
-  
-    // // Listen for a response to our request.
-    // request.onload = function() {
-    //   // Check for success.
-    //   if (this.status === 200) {
-    //     let data = JSON.parse(this.response);
-    //     console.log(data);
-    //     $randomFoxImage.src = data.image;
-    //   }
-    // }
-    // request.send();
-  
-    fetch("https://randomfox.ca/floof/").then(response => {
-      response.json().then(data => {
-      console.log(data);
-      $randomFoxImage.src = data.image;
-      });
-    });
-  }
-
-  function initContent() {
-    getRandomFox();
-    $getRandomFoxButton.addEventListener("click", getRandomFox, false);
-    $getRandomFoxButton.disabled = false;
-  }
-
-  /* Main */
-
-  function main() {
-    console.log("initiated");
+  // Self-invoking "main"-function.
+  (function main() {
     $mainMenu.addEventListener("click", handleEvent, false);
-    initContent();
-  }
-
-  main();
+    // initContent();
+  }());
 }());

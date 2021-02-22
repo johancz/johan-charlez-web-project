@@ -363,7 +363,7 @@ workspace.code-workspace
 
 
 
-
+**/.ignore/
 
 # maybe temporary
 .eslintrc.json
