@@ -32,22 +32,36 @@
     // temporary solution:
     // show logged-in <div>
     // $loggedInContainer.classList.remove("hidden");
-    document.getElementById("messageBox").innerHTML = "Hello, " + user.email + "! You are *still* logged in! :)";
+    document.getElementById("messageBox").innerHTML = "Hello, " + user.userData.profile.name + "! You are *still* logged in! :)";
+    console.log(user);
     loadPageContent();
   }, function (error) {
     oktaSignIn.showSignInToGetTokens({
       el: '#okta-login-container'
     }).then(function (tokens) {
+      console.log(tokens.idToken.userData);
       oktaSignIn.authClient.tokenManager.setTokens(tokens);
       oktaSignIn.remove();
 
-      const idToken = tokens.idToken;
-      // $logOutButton.style.display = 'block';
-      // temporary solution:
-      // show logged-in <div>
-      document.getElementById("messageBox").innerHTML = "Hello, " + idToken.claims.email + "! You just logged in! :)";
-      loadPageContent();
-      // $loggedInContainer.classList.remove("hidden");
+      // fetch("https://dev-75535493.okta.com/oauth2/default/v1/userinfo").then(response => {
+      //   console.log(response);
+      //   response.json().then(data => {
+      //     console.log(data)
+      //   });
+      // });
+
+      // Get UserInfo
+      oktaSignIn.authClient.token.getUserInfo().then(function (user) {
+        console.log(user);
+
+        const idToken = tokens.idToken;
+        // $logOutButton.style.display = 'block';
+        // temporary solution:
+        // show logged-in <div>
+        document.getElementById("messageBox").innerHTML = "Hello, " + user.userData.profile.name + "! You just logged in! :)";
+        loadPageContent();
+        // $loggedInContainer.classList.remove("hidden");
+      });
 
     }).catch(function (err) {
       console.error(err);
@@ -59,7 +73,7 @@
       console.log(response);
       
       response.text().then(data => {
-        console.log(data);
+        // console.log(data);
         $pageContainer.insertAdjacentHTML("beforeend", data);
 
         // Once the new page has been added to the DOM, add its' scripts (if any).
@@ -105,4 +119,6 @@
       }
     }, false);
   });
+
+  fakeLogin(); // todo(joch): remove
 }(OktaSignIn));
