@@ -1,0 +1,28 @@
+
+          <li>
+            <!-- Ideas to include data -->
+            <!-- 
+              data-page-scripts and data-page-styles
+              ||  data-page-js and data-page-css
+              || data-page-files='{ js: [_array_of_.js_file_urls_] css: [_array_of_.css_file_urls_] }'
+            -->
+            <!-- Idea 1: using <input type="hidden">. -->
+            <!-- <input type="hidden" data-url-js="./pages/styles/login.css"> -->
+            <!-- <input type="hidden" data-url-js="./pages/styles/pageScript2.css"> -->
+            <!-- <input type="hidden" data-url-js="./pages/scripts/login.js"> -->
+            <!-- <input type="hidden" data-url-js="./pages/scripts/pageScript2.js"> -->
+            <!-- Idea 1: using <input type="hidden"> -->
+            <!-- Idea 2: using the 'data'-attribute with its value spanning multiple lines. -->
+            <!-- <a data-page="login.html" data-page-files='{
+              js: ["./pages/scripts/login.js", "./pages/styles/pageScript2.js"]
+              css: ["./pages/styles/login.css", "./pages/styles/pageScript2.css"]
+            }' data-menuitem="Login" href="./pages/login.html">Login</a> -->
+            <!-- Idea 2: using the 'data'-attribute with the attributes & properties spread over multiple lines.  -->
+            <!-- <a data-page="login.html"
+               data-page-files='{js:["./pages/scripts/login.js","./pages/styles/pageScript2.js"]css:["./pages/styles/login.css","./pages/styles/pageScript2.css"]}'
+               data-menuitem="Login" href="./pages/login.html">Login</a> -->
+               <!-- Idea 3: using the 'data'-attribute with its value on a single line. -->
+               <!-- <a data-page="login.html" data-page-files='{js:["./pages/scripts/login.js","./pages/styles/pageScript2.js"]css:["./pages/styles/login.css","./pages/styles/pageScript2.css"]}' data-menuitem="Login" href="./pages/login.html">Login</a> -->
+               
+            <a data-page="login.html" data-page-scripts='["./pages/scripts/login.js"]' data-menuitem="Login" href="./pages/login.html">Login</a>
+          </li>
