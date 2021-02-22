@@ -18,3 +18,4 @@
 - https://steamcommunity.com/dev
 - https://opendata.smhi.se/apidocs/
 - Google Earth
+- https://ghibliapi.herokuapp.com/
