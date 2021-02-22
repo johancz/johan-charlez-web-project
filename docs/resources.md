@@ -21,6 +21,12 @@
   - example: https://random.earth/
   - alternative to Google Eath? https://gist.github.com/oliveratgithub/eb4a33db70b258120eac
 - https://ghibliapi.herokuapp.com/
+- https://api.le-systeme-solaire.net/en/
 
 ## Fonts
 - https://github.com/ryanoasis/nerd-fonts
+
+## Favicon
+- https://favicon.io/
+- https://realfavicongenerator.net/
+- https://material.io/resources/icons/?style=baseline
