@@ -7,7 +7,7 @@
     authParams: {
       issuer: "https://dev-75535493.okta.com/oauth2/default"
     },
-    redirectUri: "http://localhost:8080",
+    redirectUri: "http://127.0.0.1:5001",
     registration: {
       parseSchema: function (schema, onSuccess, onFailure) {
         // handle parseSchema callback
