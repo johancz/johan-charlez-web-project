@@ -18,6 +18,8 @@
 - https://steamcommunity.com/dev
 - https://opendata.smhi.se/apidocs/
 - Google Earth
+  - example: https://random.earth/
+  - alternative to Google Eath? https://gist.github.com/oliveratgithub/eb4a33db70b258120eac
 - https://ghibliapi.herokuapp.com/
 
 ## Fonts
