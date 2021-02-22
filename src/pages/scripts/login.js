@@ -56,6 +56,8 @@
 
   function loadPageContent() {
     fetch("./pages/page-signedin.html").then(response => {
+      console.log(response);
+      
       response.text().then(data => {
         console.log(data);
         $pageContainer.insertAdjacentHTML("beforeend", data);
