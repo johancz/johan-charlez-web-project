@@ -9,9 +9,11 @@
 - https://www.thinkful.com/learn/a-guide-to-using-github-pages/start/existing-project/project-page/existing-repo/
 - https://stackoverflow.com/questions/36782467/set-subdirectory-as-website-root-on-github-pages
 
-## SSO
-- https://developer.okta.com/blog/2018/06/08/add-authentication-to-any-web-page-in-10-minutes (Outdated guide?)
-- https://developer.okta.com/code/javascript/okta_sign-in_widget/ (Incomplete guides)
+## SSO & Login
+- Okta:
+  - https://developer.okta.com/blog/2018/06/08/add-authentication-to-any-web-page-in-10-minutes (Outdated guide?)
+  - https://developer.okta.com/code/javascript/okta_sign-in_widget/ (Incomplete guides)
+  - https://developer.okta.com/live-widget/
 
 ## API Candidates
 - https://github.com/public-apis/public-apis
