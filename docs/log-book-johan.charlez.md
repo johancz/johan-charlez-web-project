@@ -1,4 +1,12 @@
 # Log Book - johan.charlez
+## 2021-02-22 kl.23:49
+  - Converted the website from a "faux" SPA to something closer to a real SPA.
+  - I decided to research APIs today (and implement at least one partiallly), and I found a couple of interesting candidates.
+    - The first one is an API for the Sol System, which returns some data on the planets and other bodies in our solar system.
+      - todo: I want to draw the planets in some way on a Canvas, and present the data for each planet and our sun when the user clicks a planet.
+    - The second API is one of Västtrafik's called "livemap", which returns the current possition of "all vehicles" a user-provded bounding-box. The idea is to draw a representation for each vehice (for now a circle) on a static map image, and update their positions on the map as frequently as possible.
+      - As of 2021-02-22 23:49 I have completed most of this. What remains is to implement the code which fetches the authentication token.
+  - I converted some of the "Fetches" from the `.then` to `await` and `sync`.
 ## 2021-02-19 kl.22:48
   - Complete most the convertion from "faux" SPA to something closer to a real SPA. Can you make a real single-page application without a backend component?
     - There are things left to do, such as:
