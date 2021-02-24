@@ -1,4 +1,5 @@
 # Resources
+
 ## CSS
 - https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/
 
@@ -31,3 +32,6 @@
 - https://favicon.io/
 - https://realfavicongenerator.net/
 - https://material.io/resources/icons/?style=baseline
+
+## JavaScript
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch
