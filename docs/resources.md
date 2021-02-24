@@ -25,6 +25,8 @@
   - https://earthview.withgoogle.com/
 - https://ghibliapi.herokuapp.com/
 - https://api.le-systeme-solaire.net/en/
+- https://developer.vasttrafik.se
+  - Tool https://www.keene.edu/campus/maps/tool/
 
 ## Fonts
 - https://github.com/ryanoasis/nerd-fonts
