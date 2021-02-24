@@ -115,7 +115,7 @@
         return false;
       }
 
-      this.$canvas = document.querySelector("#canvas-sol-system");
+      this.$canvas = document.querySelector("#canvas-vasttrafik-livemap");
       this.$canvas.width = 1218;
       this.$canvas.height = 750;
       this.$canvas.style.backgroundImage = "url(../../resources/background-images/map_gbg_for_busses.png";
