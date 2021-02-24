@@ -1,4 +1,6 @@
 (function() {
+  const $pageScriptsContainer = document.getElementById("page-scripts");
+  
   /* Here be foxes ("API stuff") */
   const getRandomFox = {
     $randomFoxImage: undefined,
@@ -10,7 +12,7 @@
       // Create and send the request.
       // let request = new XMLHttpRequest();
       // request.open("GET", "https://randomfox.ca/floof/", true);
-    
+
       // // Listen for a response to our request.
       // request.onload = function() {
       //   // Check for success.
@@ -21,11 +23,11 @@
       //   }
       // }
       // request.send();
-    
+
       fetch("https://randomfox.ca/floof/").then(response => {
         response.json().then(data => {
           let newImage = document.createElement("img");
-          
+
           // Wait for the new image to load before enabling the button again.
           newImage.onload = e => {
             this.$randomFoxImage.src = e.target.src;
@@ -39,7 +41,7 @@
       });
     },
 
-    handleEvent: function(e) {
+    handleEvent: function (e) {
       console.log(this, e.target);
       if (e.target === this.$getRandomFoxButton && e.type === "click") {
         e.target.disabled = true;
@@ -48,10 +50,10 @@
       }
     },
 
-    init: function() {
+    init: function () {
       this.$randomFoxImage = document.getElementById("random-fox");
       this.$getRandomFoxButton = document.getElementById("get-random-fox");
-    
+
       // First request and display a fox picture, and then enabled the button so that the user can request a new picture.
       this.getAndDisplayFox();
       this.$getRandomFoxButton.addEventListener("click", this, false);
@@ -59,8 +61,31 @@
     }
   };
 
+  async function loadAPIScript(url) {
+    let response = await fetch(url);
+
+    console.log(response);
+    if (response.ok) {
+      let data = await response.text();
+      let $script = document.createElement("script");
+      $script.type = "text/javascript";
+      $script.textContent = data;
+      $script.classList.add("sub-script");
+      $pageScriptsContainer.appendChild($script);
+
+    }
+    else {
+      // todo(joch): error handling.
+      console.log(response);
+    }
+  }
+
   // Self-invoking "main"-function.
   (function main() {
+    console.log("main (page-signedin.js)");
+    // Load API implementation script-files.
     getRandomFox.init();
+    loadAPIScript("./pages/scripts/page-signedin-subpage-api-vasttrafik-live-vehicle-map.js");
+    console.log("test: after the 3rd loadAPIScript call.");
   }());
 }());
