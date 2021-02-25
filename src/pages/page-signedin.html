@@ -9,6 +9,18 @@
   
   <section>
     <h3>The Solar System OpenData</h3>
-    <canvas id="canvas-sol-system"></canvas>
+    <h4>How to use:</h4>
+    <p>Click on a planet or the sun for some information about the body.</p>
+    <div id="solar-system-container">
+      <div id="the-sun-container">
+        <div id="the-sun" class="sol-system-body"></div>
+        <h4 id="the-sun-header">The Sun</h4>
+      </div>
+
+    </div>
+    <div id="tooltip" class="hidden">
+      <div id="tooltip-contents"></div>
+      <button type="button" id="tooltip-close-button">Close</button>
+    </div>
   </section>
 </div>
