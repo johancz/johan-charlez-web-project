@@ -317,4 +317,16 @@ span {
   font-size: 2em;
   font-family: sans-serif;
   color: white;
+
+/***********************/
+/* Okta sign-in widget */
+/***********************/
+  
+/* Hide the header since I don't plan on using it. */
+.okta-sign-in-header.auth-header {
+  display: none;
+}
+
+#okta-sign-in {
+  margin-top: 8px;
 }
