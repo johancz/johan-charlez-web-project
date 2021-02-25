@@ -1,5 +1,6 @@
 (function (OktaSignIn) {
   const $pageContainer = document.getElementById("page-main-contents");
+  let loadedContent = false;
 
   const oktaSignIn = new OktaSignIn({
     baseUrl: "https://dev-75535493.okta.com",
@@ -9,15 +10,15 @@
     },
     redirectUri: "http://127.0.0.1:5001",
     registration: {
-      parseSchema: function (schema, onSuccess, onFailure) {
+      parseSchema: (schema, onSuccess, onFailure) => {
         // handle parseSchema callback
         onSuccess(schema);
       },
-      preSubmit: function (postData, onSuccess, onFailure) {
+      preSubmit: (postData, onSuccess, onFailure) => {
         // handle preSubmit callback
         onSuccess(postData);
       },
-      postSubmit: function (response, onSuccess, onFailure) {
+      postSubmit: (response, onSuccess, onFailure) => {
         // handle postsubmit callback
         onSuccess(response);
       }
@@ -27,56 +28,53 @@
     },
   });
 
-  oktaSignIn.authClient.token.getUserInfo().then(function (user) {
-    // $logOutButton.style.display = 'block';
-    // temporary solution:
-    // show logged-in <div>
-    // $loggedInContainer.classList.remove("hidden");
-    document.getElementById("messageBox").innerHTML = "Hello, " + user.email + "! You are *still* logged in! :)";
+  oktaSignIn.authClient.token.getUserInfo().then(user => {
+    document.getElementById("user-first-name").innerHTML = "&nbsp;" + user.userData.profile.given_name;
     loadPageContent();
-  }, function (error) {
-    oktaSignIn.showSignInToGetTokens({
-      el: '#okta-login-container'
-    }).then(function (tokens) {
-      oktaSignIn.authClient.tokenManager.setTokens(tokens);
-      oktaSignIn.remove();
+  },
+    () => { // The user is not signed in.
+      oktaSignIn.showSignInToGetTokens({ // Show the sign-in form.
+        // Specify the id of the container for the sign-in widget.
+        el: '#okta-login-container'
+      }).then(tokens => { // Sucessfully signed-in.
+        oktaSignIn.authClient.tokenManager.setTokens(tokens);
+        oktaSignIn.remove();
 
-      const idToken = tokens.idToken;
-      // $logOutButton.style.display = 'block';
-      // temporary solution:
-      // show logged-in <div>
-      document.getElementById("messageBox").innerHTML = "Hello, " + idToken.claims.email + "! You just logged in! :)";
-      loadPageContent();
-      // $loggedInContainer.classList.remove("hidden");
+        // Call getUserInfo() to get the user's first name.
+        oktaSignIn.authClient.token.getUserInfo().then(user => {
+          document.getElementById("user-first-name").innerHTML = "&nbsp;" + user.userData.profile.given_name;
+        });
 
-    }).catch(function (err) {
-      console.error(err);
-    });
-  });
+        // Don't wait for the user's first name, load the contents immediately.
+        loadPageContent();
+
+      }).catch(error => { // Something went wrong the user attempted to sign-in.
+        console.error(error);
+      });
+    }
+  );
 
   function loadPageContent() {
+    if (loadedContent) {
+      return false;
+    }
+    loadedContent = true;
+
     fetch("./pages/page-signedin.html").then(response => {
       console.log(response);
-      
+
       response.text().then(data => {
-        console.log(data);
         $pageContainer.insertAdjacentHTML("beforeend", data);
 
         // Once the new page has been added to the DOM, add its' scripts (if any).
-        // console.log(e.target.dataset.pageScripts);
-        // console.log(JSON.parse(e.target.dataset.pageScripts));
-        // if (e.target.dataset.pageScripts) {
-        // for (let scriptPath of JSON.parse(e.target.dataset.pageScripts)) {
-        // console.log(scriptPath);
         let $script = document.createElement("script");
         $script.type = "text/javascript";
         $script.src = "./pages/scripts/page-signedin.js";
-        // console.log($script);
         $pageContainer.appendChild($script);
+
+        // Add event listener for the sign-out button.
         const $logOutButton = document.getElementById("logout");
         $logOutButton.addEventListener("click", logout, false);
-        // } 
-        // }
       });
     });
   }
@@ -89,13 +87,14 @@
   function logout() {
     oktaSignIn.authClient.signOut();
     location.reload();
-    // temporary solution:
-    // hide logged-in <div>
+    // todo(joch): fix this temporary solution? note(joch): Is it still temporary?
     const $loggedInContainer = document.getElementById("logged-in");
-    // $loggedInContainer.classList.add("hidden");
     $loggedInContainer.remove();
   }
 
+  // Code for bypassing the login step, mainly 
+  // note(joch): This is code which allows "hacking" into the website by entering "hacker" in the username field in the sign-in widget.
+  // todo(joch): Decide whether to keep this or replace with a button (e.g <button type="button">I'm a hacker, let me in!</button>), and in that case implement it.
   oktaSignIn.on("ready", () => {
     console.log(document.getElementById("okta-signin-username"));
     document.getElementById("okta-signin-username").addEventListener("input", e => {
@@ -105,4 +104,7 @@
       }
     }, false);
   });
+
+  // note(joch): Code for bypassing the login step, for debugging and developerment. 
+  fakeLogin(); // todo(joch): remove
 }(OktaSignIn));
