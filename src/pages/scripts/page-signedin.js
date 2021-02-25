@@ -12,7 +12,6 @@
       $script.textContent = data;
       $script.classList.add("sub-script");
       $pageScriptsContainer.appendChild($script);
-
     }
     else {
       // todo(joch): error handling.
@@ -23,7 +22,9 @@
   // Self-invoking "main"-function.
   (function main() {
     console.log("main (page-signedin.js)");
+    // Load subpages
     // Load API implementation script-files.
+    loadAPIScript("./pages/scripts/page-signedin-subpage-api-random-fox.js");
     loadAPIScript("./pages/scripts/page-signedin-subpage-api-vasttrafik-live-vehicle-map.js");
     console.log("test: after the 3rd loadAPIScript call.");
   }());
