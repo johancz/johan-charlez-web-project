@@ -1,12 +1,31 @@
 <!-- <div id="logged-in" class="hidden"> -->
 <div id="logged-in">
+  <!-- todo(joch): reorganize and style -->
   <section>
     <h3>Logged in</h3>
     <!-- <button id="logout" class="button hidden">Logout</button> -->
     <button id="logout">Logout</button>
   </section>
   
-  <section>
+  <section id="section-api-solar-system">
+    <h3>The Solar System OpenData</h3>
+    
+    <h4>How to use:</h4>
+    <p>Click on a planet or the sun for some information about the body.</p>
+    <div id="solar-system-container">
+      <div id="the-sun-container">
+        <div id="the-sun" class="sol-system-body"></div>
+        <h4 id="the-sun-header">The Sun</h4>
+      </div>
+    </div>
+    
+    <div id="tooltip" class="hidden">
+      <div id="tooltip-contents"></div>
+      <button type="button" id="tooltip-close-button">Close</button>
+    </div>
+  </section>
+  
+  <section id="section-api-vasttrafik-livemap">
     <h3>Live map of some of Västtrafik's vehicles.</h3>
     <canvas id="canvas-vasttrafik-livemap"></canvas>
   </section>

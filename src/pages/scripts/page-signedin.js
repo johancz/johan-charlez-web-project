@@ -22,10 +22,9 @@
   // Self-invoking "main"-function.
   (function main() {
     console.log("main (page-signedin.js)");
-    // Load subpages
-    // Load API implementation script-files.
+    // Load API implementation scripts.
     loadAPIScript("./pages/scripts/page-signedin-subpage-api-random-fox.js");
+    loadAPIScript("./pages/scripts/page-signedin-subpage-solar-system.js");
     loadAPIScript("./pages/scripts/page-signedin-subpage-api-vasttrafik-live-vehicle-map.js");
-    console.log("test: after the 3rd loadAPIScript call.");
   }());
 }());

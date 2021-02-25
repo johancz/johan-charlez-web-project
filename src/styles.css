@@ -189,6 +189,9 @@ h2::first-letter, h3::first-letter {
   font-weight: 400;
   color: var(--separator-color);
 }
+h4, h5 {
+  margin-top: 10px;
+}
 
 #logo {
   padding: 10px;
@@ -220,6 +223,105 @@ span {
   }
 }
 
+/*****************/
+/* Solar System API */
+/*****************/
+
+#solar-system-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.sol-system-body {
+  border-radius: 50%;
+}
+
+#the-sun-container {
+  position: relative;
+  height: 200px;
+}
+
+#the-sun {
+  position: absolute;
+  /* position: relative; */
+  background-color: orange;
+  background-image: linear-gradient(orange 99%, orangered);
+  box-shadow: 0 0 25px orange;
+  /* box-shadow */
+  -webkit-box-shadow: orange 0px 0 10px;
+  -moz-box-shadow: orange 0 0 10px;
+  box-shadow: orange 0 0 100px;
+}
+#the-sun:hover {
+  background-color: orangered;
+}
+
+.sol-system-planet {
+  position: relative;
+  margin: 50px auto 0;
+  background-color: black;
+}
+.sol-system-planet:hover {
+  background-color: blue;
+  cursor: pointer;
+}
+.sol-system-planet::after {
+  content: attr(data-planet-name);
+  position: relative;
+  /* left: calc(.5vw + 100px); */
+  /* left: calc(0vw + 100px); */
+  left: calc(100% + 10px);
+  font-size: 1em;
+  /* Half the height of the parent '.sol-system-planet' minus half the font-size to position the right roughtly vertically aligned with the parent. */
+  top: calc(50% - .5em);
+  height: 100%;
+  line-height: 50%;
+  /* vertical-align: middle; */
+  
+  /* margin: 50px auto 0; */
+  /* background-color: black; */
+}
+
+#tooltip {
+  position: fixed;
+  left: 50%; /* note(joch): temporary */
+  top: 50%; /* note(joch): temporary */
+  transform: translate(-50%, -50%);
+  background-color: whitesmoke;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  z-index: 1000;
+}
+
+#tooltip-close-button {
+  margin-top: 20px;
+  padding: 10px;
+  cursor: pointer;
+  float: right; /* horizontally align the button to the right */
+  background-color: lightgray;
+  border: 2px solid orangered;
+  border-radius: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+#tooltip-close-button:hover {
+  background-color: orange;
+}
+
+#the-sun-header {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  z-index: 999;
+  font-size: 2em;
+  font-family: sans-serif;
+  color: white;
+
+/***********************/
+/* Okta sign-in widget */
+/***********************/
+  
 /* Hide the header since I don't plan on using it. */
 .okta-sign-in-header.auth-header {
   display: none;
