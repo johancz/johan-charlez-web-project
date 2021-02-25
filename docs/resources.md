@@ -1,5 +1,8 @@
 # Resources
 
+## Codebase folder structure
+- https://stackoverflow.com/questions/22842691/what-is-the-meaning-of-the-dist-directory-in-open-source-projects/22844164#22844164
+
 ## CSS
 - https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/
 
@@ -36,3 +39,19 @@
 ## JavaScript
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch
 - https://colorlib.com/wp/top-templating-engines-for-javascript/
+
+## HTML
+### "Templating"/"pre-processors"/static site generator.
+- https://haml.info/docs/yardoc/file.REFERENCE.html
+- https://www.geeksforgeeks.org/haml-html-pre-processor/
+- http://www.thinkcode.se/blog/2015/06/19/include-header-and-footer-in-a-mustache-template
+- https://startae.com/blog/improve-your-development-workflow-using-html-preprocessors/
+- https://old.reddit.com/r/webdev/comments/5k2rjd/is_it_possible_to_precompile_static_html/
+- https://www.creativebloq.com/features/10-best-static-site-generators
+- https://middlemanapp.com/basics/templating-language/
+- https://middlemanapp.com/basics/layouts/
+- https://jekyllrb.com/docs/step-by-step/04-layouts/
+- https://jamstack.org/generators/harp/
+- http://harpjs.com/docs/development/jade
+- https://handlebarsjs.com/guide/#partials
+- https://handlebarsjs.com/installation/precompilation.html#getting-started
