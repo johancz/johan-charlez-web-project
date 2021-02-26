@@ -32,6 +32,10 @@ html, body {
 
 body {
   background-color: whitesmoke;
+  /* background-image: url(./resources/background-images/pattern-squares-gray.png); */
+  /* background-image: url(./resources/background-images/pattern-squares-lighter-gray.png); */
+  background-image: url(./resources/background-images/pattern-squares-much-lighter-gray.png);
+  background-position: top center;
 }
 hr.vertical {
   display: inline;
@@ -48,6 +52,7 @@ p {
 
 main {
   padding: 20px;
+  background-color: white;
 }
 
 fieldset {
@@ -79,6 +84,7 @@ legend {
   min-height: 100vh;
   /* note(joch): for debugging *//* todo(joch): remove */
   /* border: 5px solid green;*/
+  background-color: transparent;
 }
 
 /* todo(joch): temp? */
@@ -93,6 +99,12 @@ header {
   background-image: url("./resources/background-images/89baaec3227c63044d8d715b7388f8b7.png");
   background-repeat: no-repeat;
   background-size: cover;
+
+  /* background-image: url("./resources/background-images/background-triangles.png"); */
+  /* background-size: contain; */
+  /* background-position: center; */
+  /* background-size: 100% auto; */
+  
   padding-bottom: 10px;
 }
 nav {
@@ -150,6 +162,9 @@ footer {
   padding: 10px;
   /* margin-top: 10px; */
   border-top: 5px solid rgb(185, 185, 185);
+  /* background: url(./resources/background-images/pattern_diagonal_dotted_cross.png) center center; */
+  /* background: url(./resources/background-images/pattern-squares-lighter-gray.png) center center; */
+  background-color: rgba(255, 255, 255, .5);
 }
 
 /* Headers */

@@ -40,7 +40,6 @@
       background: radial-gradient(circle, rgba(0, 0, 0, .7) 0%, rgba(0, 0, 0, .7) 100%);
       z-index: 1000;
       animation-fill-mode: forwards;
-      /* animation-fill-mode: both; */
     }
     #popup-background.hide {
       /* display: none; */
@@ -48,8 +47,6 @@
       animation: animation-popup-background 1s;
       background: radial-gradient(circle, rgba(0, 0, 0, .7) 0%, rgba(0, 0, 0, .7) 100%);
       z-index: 1000;
-      animation-fill-mode: forwards;
-      /* animation-fill-mode: both; */
     }
     #popup {
       position: absolute;
@@ -222,9 +219,7 @@
   <div class="controlRect bottom right" id="controlRect_bottomright"></div>
   
   <script type="text/javascript">
-    $container = document.getElementById("container");
     $popupBackground = document.getElementById("popup-background");
-    $popup = document.getElementById("popup");
     $button_showPopup = document.getElementById("show-popup");
     $button_hidePopup = document.getElementById("hide-popup");
 

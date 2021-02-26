@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding:0; }
+    html, body { width: 100%; height: 100%; }
+    #canvas { display:block; border: 5px solid lightgray; }
+  </style>
+  <title>idle animation with canvas</title>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  
+  <script>
+    (function() {
+      let canvas = document.querySelector("#canvas");
+      let borders = parseFloat(getComputedStyle(canvas)["border-left-width"]) * 2
+      canvas.width = window.innerWidth - borders;
+      canvas.height = window.innerHeight - borders;
+      let ctx = canvas.getContext("2d");
+
+      let rect = {
+        x: 0,
+        y: 0,
+        dX: 5,
+        dY: 5,
+        width: 50,
+        height: 50,
+        color: undefined,
+
+        setColor() {
+          this.color = ctx.fillStyle = `rgb(
+            ${Math.floor(Math.random() * (255 + 1))},
+            ${Math.floor(Math.random() * (255 + 1))},
+            ${Math.floor(Math.random() * (255 + 1))}
+          )`;
+        },
+
+        update() {
+          this.x += this.dX;
+          this.y += this.dY;
+          this.endX = this.x + this.width;
+          this.endY = this.y + this.height;
+
+          if (this.x < 0 || this.endX > canvas.width) { // split and calculate new x
+            this.dX = Math.floor(Math.random() * (5 - 11)) + 10;
+            this.dX *= -1;
+            console.log(Math.floor(Math.random() * (5 - 11)) + 10, this.dX);
+            this.setColor();
+          }
+          
+          if (this.y < 0 || this.endY > canvas.height) { // split and calculate new x
+            this.dY = Math.floor(Math.random() * (5 - 11)) + 10;
+            this.dY *= -1;
+            console.log(Math.floor(Math.random() * (5 - 11)) + 10, this.dY);
+            // console.log(this.dY);
+            // this.endY = this.y + this.height;
+            this.setColor();
+          }
+        },
+
+        init() {
+          this.endX = this.x + this.width;
+          this.endY = this.y + this.height;
+          this.setColor();
+        }
+      };
+
+      function loop() {
+        update();
+        draw();
+
+        requestAnimationFrame(loop);
+      }
+
+      function update() {
+        rect.update();
+      }
+
+      function draw() {
+        ctx.fillStyle = this.color;
+        ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
+
+      }
+
+      rect.init();
+      draw();
+      loop();
+    }());
+
+  </script>
+</body>
+</html>
