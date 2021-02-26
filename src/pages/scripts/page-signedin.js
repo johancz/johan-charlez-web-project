@@ -15,7 +15,7 @@
     }
     else {
       // todo(joch): error handling.
-      console.log(response);
+      console.error("Unknown error.");
     }
   }
 
@@ -23,8 +23,8 @@
   (function main() {
     console.log("main (page-signedin.js)");
     // Load API implementation scripts.
-    loadAPIScript("./pages/scripts/page-signedin-subpage-api-random-fox.js");
-    loadAPIScript("./pages/scripts/page-signedin-subpage-solar-system.js");
-    loadAPIScript("./pages/scripts/page-signedin-subpage-api-vasttrafik-live-vehicle-map.js");
+    loadAPIScript("./pages/scripts/subpage-api-random-fox.js");
+    loadAPIScript("./pages/scripts/subpage-solar-system.js");
+    loadAPIScript("./pages/scripts/subpage-api-vasttrafik-livemap.js");
   }());
 }());
