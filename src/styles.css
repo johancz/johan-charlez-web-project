@@ -22,6 +22,17 @@
   display: none;
 }
 
+button {
+  margin: 10px 0;
+  padding: 10px;
+  cursor: pointer;
+  background-color: lightgray;
+  border: 2px solid orangered;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: 300;
+}
+
 /***************************/
 /* Element specific styles */
 /***************************/
@@ -35,8 +46,8 @@ html {
   The following two lines stop the contents of the page from moving horizontally when a scrollbar on <body> is toggled.
     - source: https://aykevl.nl/2014/09/fix-jumping-scrollbar
   */
-  margin-left: calc(100vw - 100%);
-  margin-right: 0;
+  /* margin-left: calc(100vw - 100%); */
+  /* margin-right: 0; */
 }
 
 body {
@@ -76,7 +87,7 @@ legend {
 }
 
 #root-container {
-  min-width: 360px;
+  min-width: 320px;
   max-width: 100%;
   width: 1200px;
   /* height: 100%; */
@@ -204,25 +215,9 @@ span {
 
 #random-fox {
   /* float: right; */
-  max-width: 100%;
+  max-width: calc(100% + 40px);
+  margin-left: -20px;
 }
-
-/* note(joch): temporary? */
-/* .okta-sign-in-header.auth-header {
-  display: none;
-} */
-
-
-/*****************/
-/* Media Queries */
-/*****************/
-
-@media only screen and (max-width: 400px) {
-  #nav-main li {
-    display: block;
-  }
-}
-
 /*****************/
 /* Solar System API */
 /*****************/
@@ -230,6 +225,7 @@ span {
 #solar-system-container {
   overflow: hidden;
   position: relative;
+  margin: 0 -20px;
 }
 
 .sol-system-body {
@@ -240,12 +236,12 @@ span {
   position: relative;
   height: 200px;
 }
-
 #the-sun {
   position: absolute;
   /* position: relative; */
   background-color: orange;
-  background-image: linear-gradient(orange 99%, orangered);
+  background-image: radial-gradient(circle at center, orange 20%, orangered);
+  background-image: radial-gradient(circle at center, orange 60%, orangered);
   box-shadow: 0 0 25px orange;
   /* box-shadow */
   -webkit-box-shadow: orange 0px 0 10px;
@@ -255,6 +251,15 @@ span {
 #the-sun:hover {
   background-color: orangered;
 }
+#the-sun-header {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  z-index: 999;
+  font-size: 2em;
+  font-family: sans-serif;
+  color: white;
+}
 
 .sol-system-planet {
   position: relative;
@@ -262,30 +267,69 @@ span {
   background-color: black;
 }
 .sol-system-planet:hover {
-  background-color: blue;
   cursor: pointer;
+  border: 2px solid black;
 }
 .sol-system-planet::after {
   content: attr(data-planet-name);
   position: relative;
-  /* left: calc(.5vw + 100px); */
-  /* left: calc(0vw + 100px); */
   left: calc(100% + 10px);
   font-size: 1em;
   /* Half the height of the parent '.sol-system-planet' minus half the font-size to position the right roughtly vertically aligned with the parent. */
   top: calc(50% - .5em);
   height: 100%;
   line-height: 50%;
-  /* vertical-align: middle; */
-  
-  /* margin: 50px auto 0; */
-  /* background-color: black; */
+  transition: font-size .2s ease-in-out;
+}
+.sol-system-planet:hover::after {
+  left: calc(100% + 12px);
+  font-size: 1.2em;
+}
+#planet-jupiter::after,
+#planet-saturn:after,
+#planet-uranus::after,
+#planet-neptune::after {
+  display: block;
+  left: initial;
+  font-size: 2em;
+  line-height: 2em;
+  top: calc(50% - 1em);
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+#planet-mercury {
+  background-color: #b78668;
+}
+#planet-venus {
+  background-color: #f3b3b3;
+}
+#planet-earth {
+  background-color: #5dc0e3;
+}
+#planet-mars {
+  background-color: #d83b2a;
+}
+#planet-jupiter {
+  background-color: #cc8565;
+}
+#planet-saturn {
+  background-color: #ffe577;
+}
+#planet-uranus {
+  background-color: #57a0ff;
+}
+#planet-neptune {
+  background-color: #2444ab;
+  color: white;
 }
 
 #tooltip {
   position: fixed;
-  left: 50%; /* note(joch): temporary */
-  top: 50%; /* note(joch): temporary */
+  /* note(joch): the folow 2 rules are temporary? */
+  left: 50%;
+  top: 50%;
   transform: translate(-50%, -50%);
   background-color: whitesmoke;
   border: 1px solid black;
@@ -293,7 +337,6 @@ span {
   padding: 10px;
   z-index: 1000;
 }
-
 #tooltip-close-button {
   margin-top: 20px;
   padding: 10px;
@@ -309,20 +352,10 @@ span {
   background-color: orange;
 }
 
-#the-sun-header {
-  position: absolute;
-  left: 20px;
-  top: 20px;
-  z-index: 999;
-  font-size: 2em;
-  font-family: sans-serif;
-  color: white;
-}
-
 /***********************/
 /* Okta sign-in widget */
 /***********************/
-  
+
 /* Hide the header since I don't plan on using it. */
 .okta-sign-in-header.auth-header {
   display: none;
@@ -330,4 +363,35 @@ span {
 
 #okta-sign-in {
   margin-top: 8px;
+}
+
+/*****************/
+/* Media Queries */
+/*****************/
+
+/*
+When the screen-width <= Jupter's width center the planet with '(100% - 100vw) / -2'
+which calculates how many pixels wider the planet is than the width of the viewport.
+Divide this value by -2 because we're offsetting the planet from the left edge of the screen.
+*/
+@media only screen and (max-width: 699.117px) {
+  #planet-jupiter {
+    transform: translateX(calc((100% - 100vw) / -2));
+  }
+}
+/*
+When the screen-width <= Saturn's width center the planet with '(100% - 100vw) / -2'
+which calculates how many pixels wider the planet is than the width of the viewport.
+Divide this value by -2 because we're offsetting the planet from the left edge of the screen.
+*/
+@media only screen and (max-width: 582.317px) {
+  #planet-saturn {
+    transform: translateX(calc((100% - 100vw) / -2));
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  #nav-main li {
+    display: block;
+  }
 }

@@ -6,17 +6,20 @@
     $solarSystemContainer: undefined,
     $sunContainer: undefined,
     $tooltip: undefined,
+    // the radii of the planets is given in thousands of km, this scales all bodies down so that at least the planets are 100% visible.
+    bodiesScale: .005,
+    // largePlanets: ["Juptier", "Saturn", "Uranus", "Neptue"],
 
     async getData(parameters) {
       let response = await fetch(`https://api.le-systeme-solaire.net/rest/bodies${parameters}`);
       return await response.json();
     },
 
-    drawSun(dataTheSun, scale) {
-      console.log(dataTheSun.meanRadius, dataTheSun);
+    drawSun(dataTheSun, scale = this.bodiesScale) {
+      console.log(dataTheSun.meanRadius, scale);
       $theSun = document.getElementById("the-sun");
 
-      let meanDiameterScaled = dataTheSun.meanRadius *= scale;
+      let meanDiameterScaled = dataTheSun.meanRadius *= 2 * scale;
       let offsetX = 0;
       $theSun.style = `height: ${meanDiameterScaled}px;
                        width: ${meanDiameterScaled}px;
@@ -26,10 +29,14 @@
       this.$sunContainer.appendChild($theSun);
     },
 
-    drawPlanet(planet, scale) {
+    drawPlanet(planet, scale = this.bodiesScale) {
+      console.log(planet.meanRadius, scale);
+      let meanDiameterScaled = planet.meanRadius *= 2 * scale;
+
       let $newPlanet = document.createElement("div");
+      $newPlanet.id = "planet-" + planet.englishName.toLowerCase();
       $newPlanet.setAttribute("class", "sol-system-body sol-system-planet");
-      $newPlanet.style = `height: ${planet.meanRadius}px; width: ${planet.meanRadius}px;`;
+      $newPlanet.style = `height: ${meanDiameterScaled}px; width: ${meanDiameterScaled}px;`;
       $newPlanet.dataset.planetName = planet.englishName;
       $newPlanet.setAttribute("title", `Click for information about ${planet.englishName}`);
 
@@ -97,51 +104,25 @@
       console.log("\"this\"", this);
 
       // Get the planets with a meanRadius above 2000 (m).
+      // This requests planeterary bodies width a mean-radius larger than 2.000 km, ordered by periphelion (ascending).
       // There's a bug in the API where the parameter 'filter[]=isPlanet,eq,true' (where eq is the equals operator) returns bodies which are not planets.
-      // Here is the filed issue for this bug: https://github.com/systeme-solaire/api-rest/issues/3.
+      // Here is the bug report on Github: https://github.com/systeme-solaire/api-rest/issues/3.
       // One workaround mentioned in the bug report is to use 'neq' (not equals) instead of 'eq'. ¯\_(ツ)_/¯
-      planetaryBodies = await this.getData("?data=&filter[]=isPlanet,neq,true&filter[]=meanRadius,gt,2000");
-      console.log("\"planetaryBodies\"", planetaryBodies);
-      // Sort planets by their 'perihelion', the point in a planet's orbit when it is the closests to the Sun. 
-      // planetaryBodies.sort.apply(planetaryBodies, body => body.perihelion);
-      planetaryBodies.bodies = planetaryBodies.bodies.sort((planet1, planet2) => {
-        return planet1.perihelion - planet2.perihelion;
-        if (planet1.perihelion < planet2.perihelion) { // planet1 is smaller, "return -1" === "no changes required".
-          return -1;
-        }
-        else if (planet1.perihelion > planet2.perihelion) { // planet1 is larger, "return 1" === "put planet2 before planet1".
-          return 1;
-        }
-
-        return 0; // The planets are the same size.
-      });
-      // console.log("\"planetaryBodies\"", planetaryBodies);
-
+      planetaryBodies = await this.getData("?data=&filter[]=isPlanet,neq,true&filter[]=meanRadius,gt,2000&order=perihelion,asc");
 
       // Get the sun.
       theSun = await this.getData("?data=&filter[]=englishName,eq,Sun");
       theSun = theSun.bodies[0];
-      // console.log("\"theSun\"", theSun);
+      console.log("theSun:", theSun);
+      
+      // Draw the celestial bodies.
+      this.drawSun(theSun);
 
-      // let allBodies = [...planetaryBodies.bodies, ...theSun.bodies];
-      // // console.log("allBodies:", allBodies);
-      // let allBodies_scaledDownMeanRadius = allBodies.map(body => {
-      //   body.meanRadius /= 100;
-      //   return body;
-      // });
-
-      let planets_scaledDownMeanRadius = planetaryBodies.bodies.map(body => {
-        body.meanRadius /= 1000;
-        return body;
-      });
-      // console.log("allBodies_scaledDownMeanRadius:", allBodies_scaledDownMeanRadius);
-
-      this.drawSun(theSun, .05); // set scale to 5%
-
-      for (let planet of planets_scaledDownMeanRadius) {
-        this.drawPlanet(planet, .05);
+      for (let planet of planetaryBodies.bodies) {
+        this.drawPlanet(planet);
       }
 
+      // Open a popup-window when a planet is clicked containting information about it. 
       this.$solarSystemContainer.addEventListener("click", e => {
         if (e.target.classList.contains("sol-system-planet")) {
           let $planet = e.target;
