@@ -46,10 +46,8 @@
         }
       }
 
-      let data = await response.json();
-
-      this.token = data;
-      this.generatingToken = false; // note(joch): this reset might have to be moved to code verifying that the new token works.
+      this.token = await response.json();
+      this.generatingToken = false;
     },
 
     async getData() {
@@ -94,13 +92,13 @@
       this.$canvas.width = 1218;
       this.$canvas.height = 750;
       this.$canvas.style.backgroundImage = "url(../../resources/background-images/map_gbg_for_busses.png";
-      this.$canvas.style.backgroundSize = "1218px 750px"
+      this.$canvas.style.backgroundSize = "100% 100%"
       this.$ctx = this.$canvas.getContext("2d");
 
       // Generate a new access token, which is required to use the API.
       await this.generateToken();
 
-      // The API requires the coordinates in the format "WGS84 * 1000000".
+      // The API requires the coordinates in the format "WGS84 * 1.000.000".
       for (let key in this.bounding_box.coordinates) {
         if (this.bounding_box.coordinates.hasOwnProperty(key)) {
           this.bounding_box.coordinates[key] = Math.round(this.bounding_box.coordinates[key] * 1000000);
@@ -109,7 +107,8 @@
         }
       }
 
-      setInterval(async function () { // note(joch): What if the previous fetch took longer than the timeout?
+      // note(joch): What if the previous fetch took longer than the timeout?
+      setInterval(async function () {
         await this.getData();
 
         if (!this.currentData) {

@@ -373,10 +373,5 @@ src/resources/fonts
 
 # dist/
 docs/cards.md
-src/easterEgg/
-dist/harpTest
-harpTest
-scripts.js
-styles.css
 src/experiments/old
 src/resources/favicon_io*

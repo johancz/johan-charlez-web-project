@@ -22,7 +22,8 @@
       $theSun.dataset.bodyData = JSON.stringify(dataTheSun);
 
       let meanDiameterScaled = dataTheSun.meanRadius *= 2 * scale;
-      let offsetX = 0;
+      // "top" and "left" offsets the sun so that only a small portion of the sun is visible.
+      // It is shifted to left to make the curve more discernible.
       $theSun.style = `height: ${meanDiameterScaled}px;
                        width: ${meanDiameterScaled}px;
                        left: ${meanDiameterScaled / -2}px;
@@ -43,7 +44,6 @@
     },
 
     showCelestialBodyInfoPopup(celestialBody) {
-      console.log(celestialBody);
       document.querySelector("#info-popup-planet-name").innerHTML = celestialBody.englishName;
       document.querySelector("#planet-data-semi-major-axis").innerHTML = celestialBody.semimajorAxis.toLocaleString() + " km";
       document.querySelector("#planet-data-aphelion").innerHTML = celestialBody.aphelion.toLocaleString() + " km";
@@ -88,8 +88,6 @@
     },
 
     async handleData() {
-      console.log("\"this\"", this);
-
       // Get the planets with a meanRadius above 2000 (m).
       // This requests planeterary bodies width a mean-radius larger than 2.000 km, ordered by periphelion (ascending).
       // There's a bug in the API where the parameter 'filter[]=isPlanet,eq,true' (where eq is the equals operator) returns bodies which are not planets.
@@ -100,7 +98,6 @@
       // Get the sun.
       theSun = await this.getData("?data=&filter[]=englishName,eq,Sun");
       theSun = theSun.bodies[0];
-      console.log("theSun:", theSun);
       
       // Create and draw the sun's element.
       this.drawSun(theSun);
@@ -112,7 +109,6 @@
 
       // Open a popup-window when a planet is clicked containting information about it. 
       this.$solarSystemContainer.addEventListener("click", e => {
-        // if (e.target.classList.contains("sol-system-planet")) {
         if (e.target.classList.contains("sol-system-body")) {
           let $planet = e.target;
 

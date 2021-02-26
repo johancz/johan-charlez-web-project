@@ -167,6 +167,10 @@ nav:after {
 main {
   flex: 1;
 }
+#canvas-vasttrafik-livemap {
+  margin-left: -20px;
+  max-width: calc(100% + 40px);
+}
 
 /* -------------- Footer -------------- */
 footer {
@@ -479,14 +483,13 @@ Divide this value by -2 because we're offsetting the planet from the left edge o
   }
 }
 
-@media only screen and (max-width: 1200px) {
-  #root-container {
+@media only screen and (max-width: 1240px) {
+  html {
     /*
     The following two lines stop the contents of the page from moving horizontally when a scrollbar on <body> is toggled.
       - source: https://aykevl.nl/2014/09/fix-jumping-scrollbar
     */
     /* Undo the above when the page is too narrow. */
     margin-left: 0;
-    margin-right: 0;
   }
 }
