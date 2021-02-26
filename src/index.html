@@ -4,11 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Random Foxes taking the buss to see the stars</title>
-  <!-- <link rel="preconnect" href="https://fonts.gstatic.com"> -->
-  <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">  -->
-  <!-- <link rel="stylesheet" href="easterEgg/easterEgg.css"> -->
-
-  <!-- Okta - widget stuff here -->
+  <!-- Okta - widget resources -->
   <script src="https://global.oktacdn.com/okta-signin-widget/5.1.5/js/okta-sign-in.min.js" type="text/javascript"></script>
   <link href="https://global.oktacdn.com/okta-signin-widget/5.1.5/css/okta-sign-in.min.css" type="text/css" rel="stylesheet"/>
   
@@ -16,7 +12,6 @@
 </head>
 <body>
   <div id="root-container">
-    <!-- start of <header> -->
     <header>
       <div id="logo">
         <h1><b>Random <span>foxes</span></b> waiting on the <b>bus</b> to go see the <b>stars</b></h1>
@@ -24,19 +19,13 @@
       
       <nav id="nav-main">
         <ol>
-          <!-- todo(joch): change "data-menuitem" to class? -->
-          <!-- "<a href" is a fallback of sorts if the user does not have JavaScript enabled. -->
           <li><a data-page="index.html" data-menuitem="Home" href="index.html">Home</a></li>
           <li><a data-page="page-aboutDeveloper.html" data-menuitem="AboutTheDeveloper" href="./pages/page-aboutDeveloper.html">About the developer</a></li>
           <li><a data-page="page-login.html" data-page-scripts='["./pages/scripts/page-login.js"]' data-menuitem="Login" href="./pages/page-login.html">Login</a></li>
-          <!-- <li data-page="AboutTheDeveloper" data-menuitem="AboutTheDeveloper">About the developer</li> -->
-          <!-- <li data-page="Login" data-menuitem="Login">About the developer</li> -->
         </ol>
       </nav>
     </header>
-    <!-- end of <header> -->
-
-    <!-- start of <main> -->
+    
     <main>
       <button id="hackerLogin" class="hidden">I'm a hacker, sign-me in!</button>
       <button id="logout" class="hidden">Logout</button>
@@ -60,23 +49,20 @@
       </section>
 
       <section id="container-other-pages" class="page-container"></section>
-      <!-- end of <main> -->
     </main>
 
-    <!-- start of <footer> -->
     <footer>
-      <div>Made by Johan Charlez</div>
-      <div>2021</div>
-      <!-- <br> -->
-      <!-- Final Project in the course Webdevelopment frontend in the <a href="https://teknikhogskolan.se/utbildningar/net-utvecklare/">".NET-developer"-programme</a> @ <a href="https://teknikhogskolan.se/">Teknikhögskolan</a>. -->
-    </footer>
-    <!-- start of <footer> -->
+      <div>
+        <div>Your company name</div>
+        <div>Your company address and contact information.</div>
+      </div>
+      <div>
+        <div>Made by:</div>
+        <div>Johan Charlez, 2021</div>
+      </div></footer>
   </div>
-  <!-- end of #root-container -->
   
   <script src="main.js" defer></script>
-  <!-- <script src="login.js" defer></script> -->
   <div id="page-scripts"></div>
-  <!-- <script src="easterEgg/easterEgg.js" defer></script> --><!-- You did not see this. -->
 </body>
 </html>

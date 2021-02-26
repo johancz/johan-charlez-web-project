@@ -184,6 +184,9 @@ footer {
   padding: 10px;
   border-top: 5px solid rgb(185, 185, 185);
 }
+footer > div:nth-child(2) > div {
+  text-align: right;
+}
 
 /* Headers */
 h1, h2, h3 {

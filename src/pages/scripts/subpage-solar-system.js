@@ -62,7 +62,7 @@
       document.querySelector("#planet-data-axial-tilt").innerHTML = celestialBody.axialTilt + "&deg;";
 
       if (celestialBody.moons !== null) {
-        document.querySelector("#info-popup-moon-count").innerHTML = celestialBody.moons.length;
+        document.querySelector("#info-popup-moon-count").innerHTML = "(" + celestialBody.moons.length + ")";
         document.querySelector("#info-popup-moon-data").innerHTML = celestialBody.moons.map(moon => moon.moon).join(", ");
       }
     
