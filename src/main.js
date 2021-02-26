@@ -1,18 +1,12 @@
 (function () {
   "use strict";
-  var oktaSignIn;
-
-  // the '$'-prefix denotes that the variable is an html element, or collection/array/object of/with such.
+  // the '$'-prefix on variables and properties will be used throughout the project to denotes that the variable is an html element, or collection/array/object of/with such.
   const $mainMenu = document.getElementById("nav-main");
 
   /* Pages */
-  const $pages = {
-    "home": document.getElementById("page-home"),
-    "about-developer": document.getElementById("page-about-developer"),
-    "main-contents": document.getElementById("page-main-contents")
-  };
   const [$mainContainer, $mainOtherPages] = document.getElementsByClassName("page-container");
   const $pageScriptsContainer = document.getElementById("page-scripts");
+  const $hackerLoginButton = document.querySelector("#hackerLogin");
 
   if ($mainContainer === null || $mainOtherPages === null) {
     console.error("Missing vital markup, aborting.")
@@ -22,6 +16,14 @@
   async function handleClick_mainMenu(e) {
     // Stop the browser from loading 'e.target.href'.
     e.preventDefault();
+
+    // todo(joch): This button is used for development and serves as a back-up in case Okta's servers go down during the presentation (Murphy's Law).
+    $hackerLoginButton.classList.add("hidden");
+    console.log(document.querySelectorAll("[data-menuitem]"));
+    console.log(e.target);
+    // Remove the menuitem-selected from all element with the "[data-menuitem]"-attribute and add it to the clicked menuitem.
+    document.querySelectorAll("[data-menuitem]").forEach(menuitem => menuitem.removeAttribute("id"));
+    e.target.id = "menuitem-selected";
 
     // Show the correct page and hide the rest.
     switch (e.target.dataset.menuitem) {
@@ -67,7 +69,6 @@
         break;
       } // end of 'case: "Login"'
       default:
-        console.error(`The "${e.target.dataset.menuitem}"-menuitem was unexpected. It does not have a corresponding "page".`);
         break;
     }
   }

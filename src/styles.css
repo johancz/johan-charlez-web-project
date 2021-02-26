@@ -1,4 +1,8 @@
 /* -------------- Resets and Setup -------------- */
+@font-face {
+  font-family: Roboto;
+}
+
 :root {
   --separator-color: orangered;
   --hex-pattern-background-color: rgb(236, 235, 235);
@@ -67,45 +71,17 @@ main {
   padding: 20px;
 }
 
-fieldset {
-  border-color: var(--separator-color);
-  padding: 20px;
-}
-fieldset::before {
-  /* todo(joch): This message should pop up when the wrong login information is entered. Unless the identity-provider/SSO used already provides similar. */
-  content: "One does not simply walk into the restricted areas. Please enter correct login-data to proceed.";
-  top: calc(1em + 15px);
-  padding: 10px;
-  background-color: pink;
-  display: block;
-}
-legend {
-  font-size: 1.5em;
-}
-
 #root-container {
   min-width: 320px;
   max-width: 100%;
   width: 1200px;
-  /* height: 100%; */
   margin: 0 auto;
   background-color: white;
   background-color: whitesmoke;
-  /* padding: 10px; */
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   box-shadow: gray 0 0 20px;
-  /* outline-offset: 10px; */
-  /* note(joch): for debugging *//* todo(joch): remove */
-  /* border: 5px solid green;*/
-}
-
-/* todo(joch): temp? */
-#list-of-project-ideas {
-  display: list-item;
-  list-style-type: disc;
-  margin-left: 20px;
 }
 
 /* -------------- Header -------------- */
@@ -126,7 +102,6 @@ nav:after {
   pointer-events: none;
   position: absolute;
   content: "";
-  /* background: linear-gradient(rgba(0,0,0,0.25) 50%, rgba(0,0,0,0)); */
   background: rgba(0,0,0,0.25);
   left: 0;
   top: 0;
@@ -149,6 +124,7 @@ nav:after {
   list-style: none;
   position: relative;
   z-index: 2;
+  margin: 5px;
 }
 #nav-main li > a {
   text-decoration: none;
@@ -162,6 +138,9 @@ nav:after {
   text-shadow: 0 0 5px white;
   color: black;
 }
+#menuitem-selected {
+  border-bottom: 5px solid orangered;
+}
 
 /* -------------- Main -------------- */
 main {
@@ -170,6 +149,20 @@ main {
 #canvas-vasttrafik-livemap {
   margin-left: -20px;
   max-width: calc(100% + 40px);
+}
+
+#page-home img {
+  margin: 0 20px 20px;
+  width: 50%;
+  max-width: 644px;
+}
+
+#photo-the-developer {
+  float: right;
+  width: 50%;
+  max-width: 500px;
+  height: auto;
+  margin: 0 20px 20px;
 }
 
 /* -------------- Footer -------------- */
@@ -191,7 +184,7 @@ h1, h2, h3 {
 }
 h1 {
   text-align: center;
-  font-weight: 100;
+  font-weight: 300;
   text-transform: capitalize;
 }
 h2, h3 {
@@ -203,10 +196,6 @@ h1 span {
 }
 h1 > b {
   font-weight: 700;
-}
-h2::first-letter, h3::first-letter {
-  font-weight: 400;
-  color: var(--separator-color);
 }
 h4, h5 {
   margin-top: 10px 0 5px;
@@ -221,20 +210,7 @@ span {
   display: inline-block;
 }
 
-#page-home img {
-  margin: 0 20px 20px;
-  width: 50%;
-  max-width: 644px;
-}
-
-#photo-the-developer {
-  float: right;
-  width: 50%;
-  max-width: 500px;
-  height: auto;
-  margin: 0 20px 20px;
-}
-
+/* -------------- The tab-interface in "page-signedin.html" -------------- */
 #tabs > hr {
   background-color: black;
   border: none;
@@ -254,7 +230,6 @@ span {
 }
 .tab[data-selected-tab="true"],
 .tab:hover {
-  /* background-color: rgba(255, 69, 0, .1); */
   border-color: orangered;
 }
 .tab[data-selected-tab="true"] {
@@ -469,9 +444,15 @@ Divide this value by -2 because we're offsetting the planet from the left edge o
   }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 450px) {
   #nav-main li {
     display: block;
+    margin: 0 auto;
+  }
+  #nav-main li a {
+    display: block;
+    padding: 5px;
+    font-size: .8em;
   }
 
   #info-popup {

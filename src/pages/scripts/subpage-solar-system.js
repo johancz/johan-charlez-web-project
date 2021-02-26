@@ -2,7 +2,7 @@
   /* Here be planets */
   const solSystem = {
     $canvas: undefined,
-    $ctx: undefined,
+    ctx: undefined,
     $solarSystemContainer: undefined,
     $sunContainer: undefined,
     $infoPopup: undefined,

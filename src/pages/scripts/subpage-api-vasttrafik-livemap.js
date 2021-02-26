@@ -1,7 +1,7 @@
 (function () {
   const vasttrafikBuses = {
     $canvas: undefined,
-    $ctx: undefined,
+    ctx: undefined,
     currentData: undefined,
     bounding_box: {
       coordinates: {
@@ -93,7 +93,7 @@
       this.$canvas.height = 750;
       this.$canvas.style.backgroundImage = "url(../../resources/background-images/map_gbg_for_busses.png";
       this.$canvas.style.backgroundSize = "100% 100%"
-      this.$ctx = this.$canvas.getContext("2d");
+      this.ctx = this.$canvas.getContext("2d");
 
       // Generate a new access token, which is required to use the API.
       await this.generateToken();
@@ -119,18 +119,18 @@
         let scaleX = this.$canvas.width / (this.currentData.livemap.maxx - this.currentData.livemap.minx);
         let scaleY = this.$canvas.height / (this.currentData.livemap.maxy - this.currentData.livemap.miny);
 
-        this.$ctx.clearRect(0, 0, this.$canvas.width, this.$canvas.height);
-        this.$ctx.fillStyle = "black";
+        this.ctx.clearRect(0, 0, this.$canvas.width, this.$canvas.height);
+        this.ctx.fillStyle = "black";
 
         for (let i = 0; i < this.currentData.livemap.vehicles.length; i++) {
           let vehicle = this.currentData.livemap.vehicles[i];
           let canvas_vehicleX = (vehicle.x - this.currentData.livemap.minx) * scaleX;
           // Flip the Y since the coordinates above the ecuator increments the farther north you go. The Y-axis in HTML 5 Canvas "starts" at the top.
           let canvas_vehicleY = this.$canvas.height - ((vehicle.y - this.currentData.livemap.miny) * scaleY);
-          this.$ctx.beginPath();
-          this.$ctx.arc(canvas_vehicleX, canvas_vehicleY, 5, 0, 2 * Math.PI);
-          this.$ctx.fill();
-          this.$ctx.closePath();
+          this.ctx.beginPath();
+          this.ctx.arc(canvas_vehicleX, canvas_vehicleY, 5, 0, 2 * Math.PI);
+          this.ctx.fill();
+          this.ctx.closePath();
         }
       }.bind(this), 2000);
     }

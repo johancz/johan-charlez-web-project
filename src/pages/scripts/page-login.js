@@ -99,8 +99,5 @@
       afterSuccessfulSignIn();
     });
     $hackerLoginButton.classList.remove("hidden");
-
-    // $mainMenu.addEventListener("click", handleEvent, false);
-    // initContent();
   }());
 }(OktaSignIn));
