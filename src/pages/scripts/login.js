@@ -1,6 +1,9 @@
 (function (OktaSignIn) {
   const $pageContainer = document.getElementById("page-main-contents");
+  const $hackerLoginButton = document.querySelector("#hackerLogin");
   let loadedContent = false;
+
+  /* Okta sign-sign widget */
 
   const oktaSignIn = new OktaSignIn({
     baseUrl: "https://dev-75535493.okta.com",
@@ -10,18 +13,9 @@
     },
     redirectUri: "http://127.0.0.1:5001",
     registration: {
-      parseSchema: (schema, onSuccess, onFailure) => {
-        // handle parseSchema callback
-        onSuccess(schema);
-      },
-      preSubmit: (postData, onSuccess, onFailure) => {
-        // handle preSubmit callback
-        onSuccess(postData);
-      },
-      postSubmit: (response, onSuccess, onFailure) => {
-        // handle postsubmit callback
-        onSuccess(response);
-      }
+      parseSchema: (schema, onSuccess, onFailure) => onSuccess(schema),
+      preSubmit: (postData, onSuccess, onFailure) => onSuccess(postData),
+      postSubmit: (response, onSuccess, onFailure) => onSuccess(response)
     },
     features: {
       registration: true
@@ -56,6 +50,8 @@
     }
   );
 
+  /* Handle successful sign-ins and the sign-out button. */
+
   function loadPageContent() {
     if (loadedContent) {
       return false;
@@ -83,6 +79,7 @@
 
     // Add event listener for the sign-out button.
     let $logoutButton = document.querySelector("#logout");
+    $hackerLoginButton.classList.add("hidden");
     $logoutButton.addEventListener("click", logout, false);
     $logoutButton.classList.remove("hidden");
   }
@@ -90,24 +87,18 @@
   function logout() {
     oktaSignIn.authClient.signOut();
     location.reload();
-    // todo(joch): fix this temporary solution? note(joch): Is it still temporary?
-    // const $loggedInContainer = document.getElementById("logged-in");
-    // $loggedInContainer.remove();
   }
 
-  // Code for bypassing the login step, mainly 
-  // note(joch): This is code which allows "hacking" into the website by entering "hacker" in the username field in the sign-in widget.
-  // todo(joch): Decide whether to keep this or replace with a button (e.g <button type="button">I'm a hacker, let me in!</button>), and in that case implement it.
-  oktaSignIn.on("ready", () => {
-    console.log(document.getElementById("okta-signin-username"));
-    document.getElementById("okta-signin-username").addEventListener("input", e => {
-      console.log(e);
-      if (e.target.value === "hacker") {
-        afterSuccessfulSignIn();
-      }
-    }, false);
-  });
+  // Self-invoking "main"-function.
+  (function main() {
+    // note(joch): This button is only a fallback, it would not exist in the final live product.
+    $hackerLoginButton.addEventListener("click", e => {
+      oktaSignIn.remove();
+      afterSuccessfulSignIn();
+    });
+    $hackerLoginButton.classList.remove("hidden");
 
-  // note(joch): Code for bypassing the login step, for debugging and developerment. 
-  // afterSuccessfulSignIn(); // todo(joch): remove
+    $mainMenu.addEventListener("click", handleEvent, false);
+    // initContent();
+  }());
 }(OktaSignIn));

@@ -392,6 +392,7 @@ span {
   margin-top: 8px;
 }
 
+#hackerLogin,
 #logout {
   float: right;
 }
