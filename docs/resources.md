@@ -31,6 +31,7 @@
 - https://api.le-systeme-solaire.net/en/
 - https://developer.vasttrafik.se
   - Tool https://www.keene.edu/campus/maps/tool/
+  - the API requires a unique device_id for each user: https://developer.mozilla.org/en-US/docs/Web/API/MediaDeviceInfo/deviceId
 
 ## Fonts
 - https://github.com/ryanoasis/nerd-fonts
