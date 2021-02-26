@@ -114,6 +114,7 @@ header {
   background-repeat: no-repeat;
   background-size: cover;
   padding-bottom: 10px;
+  position: relative;
 }
 nav {
   
@@ -218,6 +219,11 @@ span {
   max-width: calc(100% + 40px);
   margin-left: -20px;
 }
+#get-random-fox:disabled {
+  cursor: not-allowed;
+  border-color: gray;
+}
+
 /*****************/
 /* Solar System API */
 /*****************/
@@ -363,6 +369,10 @@ span {
 
 #okta-sign-in {
   margin-top: 8px;
+}
+
+#logout {
+  float: right;
 }
 
 /*****************/

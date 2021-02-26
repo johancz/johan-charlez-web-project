@@ -11,7 +11,7 @@
     "about-developer": document.getElementById("page-about-developer"),
     "main-contents": document.getElementById("page-main-contents")
   };
-  const [$mainContainer, $mainOtherPages] = document.getElementsByTagName("main");
+  const [$mainContainer, $mainOtherPages] = document.getElementsByClassName("page-container");
   const $pageScriptsContainer = document.getElementById("page-scripts");
 
   if ($mainContainer === null || $mainOtherPages === null) {

@@ -30,6 +30,7 @@
 
   oktaSignIn.authClient.token.getUserInfo().then(user => {
     document.getElementById("user-first-name").innerHTML = "&nbsp;" + user.userData.profile.given_name;
+    afterSuccessfulSignIn();
     loadPageContent();
   },
     () => { // The user is not signed in.
@@ -39,6 +40,7 @@
       }).then(tokens => { // Sucessfully signed-in.
         oktaSignIn.authClient.tokenManager.setTokens(tokens);
         oktaSignIn.remove();
+        afterSuccessfulSignIn();
 
         // Call getUserInfo() to get the user's first name.
         oktaSignIn.authClient.token.getUserInfo().then(user => {
@@ -71,25 +73,26 @@
         $script.type = "text/javascript";
         $script.src = "./pages/scripts/page-signedin.js";
         $pageContainer.appendChild($script);
-
-        // Add event listener for the sign-out button.
-        const $logOutButton = document.getElementById("logout");
-        $logOutButton.addEventListener("click", logout, false);
       });
     });
   }
 
-  function fakeLogin() {
-    oktaSignIn.remove();
+  function afterSuccessfulSignIn() {
+    console.log("afterSuccessfulSignIn");
     loadPageContent();
+
+    // Add event listener for the sign-out button.
+    let $logoutButton = document.querySelector("#logout");
+    $logoutButton.addEventListener("click", logout, false);
+    $logoutButton.classList.remove("hidden");
   }
 
   function logout() {
     oktaSignIn.authClient.signOut();
     location.reload();
     // todo(joch): fix this temporary solution? note(joch): Is it still temporary?
-    const $loggedInContainer = document.getElementById("logged-in");
-    $loggedInContainer.remove();
+    // const $loggedInContainer = document.getElementById("logged-in");
+    // $loggedInContainer.remove();
   }
 
   // Code for bypassing the login step, mainly 
@@ -100,11 +103,11 @@
     document.getElementById("okta-signin-username").addEventListener("input", e => {
       console.log(e);
       if (e.target.value === "hacker") {
-        fakeLogin();
+        afterSuccessfulSignIn();
       }
     }, false);
   });
 
   // note(joch): Code for bypassing the login step, for debugging and developerment. 
-  fakeLogin(); // todo(joch): remove
+  // afterSuccessfulSignIn(); // todo(joch): remove
 }(OktaSignIn));

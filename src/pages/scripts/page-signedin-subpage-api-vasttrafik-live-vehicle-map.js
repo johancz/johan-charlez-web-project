@@ -111,7 +111,7 @@
       // note(joch): only for development?
       if (typeof this.key === "undefined" || typeof this.key === "undefined") {
         console.error("API 'key' and/or 'secret' is missing");
-        alert("API 'key' and/or 'secret' is missing");
+        // alert("API 'key' and/or 'secret' is missing");
         return false;
       }
 
