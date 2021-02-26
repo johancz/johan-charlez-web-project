@@ -1,5 +1,6 @@
 (function (OktaSignIn) {
   const $pageContainer = document.getElementById("page-main-contents");
+  const $sectionLogin = document.querySelector("#section-login");
   const $hackerLoginButton = document.querySelector("#hackerLogin");
   let loadedContent = false;
 
@@ -78,6 +79,7 @@
     loadPageContent();
 
     // Add event listener for the sign-out button.
+    $sectionLogin.classList.add("hidden");
     let $logoutButton = document.querySelector("#logout");
     $hackerLoginButton.classList.add("hidden");
     $logoutButton.addEventListener("click", logout, false);
@@ -98,7 +100,7 @@
     });
     $hackerLoginButton.classList.remove("hidden");
 
-    $mainMenu.addEventListener("click", handleEvent, false);
+    // $mainMenu.addEventListener("click", handleEvent, false);
     // initContent();
   }());
 }(OktaSignIn));

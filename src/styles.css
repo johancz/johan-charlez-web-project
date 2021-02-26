@@ -12,6 +12,7 @@
 * {
   box-sizing: border-box;
   margin: 0;
+  font-family: 'Roboto', sans-serif;
 }
 
 /******************/
@@ -52,6 +53,8 @@ html {
 
 body {
   background-color: whitesmoke;
+  background-color: rgb(240, 240, 240);
+  font-size: 17px;
 }
 hr.vertical {
   display: inline;
@@ -93,10 +96,13 @@ legend {
   /* height: 100%; */
   margin: 0 auto;
   background-color: white;
+  background-color: whitesmoke;
   /* padding: 10px; */
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  box-shadow: gray 0 0 20px;
+  /* outline-offset: 10px; */
   /* note(joch): for debugging *//* todo(joch): remove */
   /* border: 5px solid green;*/
 }
@@ -172,37 +178,45 @@ main {
 }
 
 footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   padding: 10px;
-  /* margin-top: 10px; */
   border-top: 5px solid rgb(185, 185, 185);
 }
 
 /* Headers */
 h1, h2, h3 {
-  margin: 10px 0;
+  margin: 20px 0 10px;
   font-family: 'Roboto', sans-serif;
 }
 h1 {
   text-align: center;
   font-weight: 100;
+  text-transform: capitalize;
 }
 
 h2, h3 {
   font-weight: 300;
+  color: var(--separator-color);
 }
 /* h1::first-letter { */
 /* } */
 /* h1 > span::first-letter { */
-h1 > span {
-  font-weight: 300;
+h1 span {
+  /* font-weight: 300; */
   color: var(--separator-color);
+}
+h1 > b {
+  font-weight: 700;
 }
 h2::first-letter, h3::first-letter {
   font-weight: 400;
   color: var(--separator-color);
 }
 h4, h5 {
-  margin-top: 10px;
+  margin-top: 10px 0 5px;
+  color: var(--separator-color);
 }
 
 #logo {
@@ -212,6 +226,20 @@ h4, h5 {
 
 span {
   display: inline-block;
+}
+
+#page-home img {
+  margin: 0 20px 20px;
+  width: 50%;
+  max-width: 644px;
+}
+
+#photo-the-developer {
+  float: right;
+  width: 50%;
+  max-width: 500px;
+  height: auto;
+  margin: 0 20px 20px;
 }
 
 /********************/
@@ -390,8 +418,10 @@ span {
 
 #okta-sign-in {
   margin-top: 8px;
+  margin: 20px 0 0;
 }
 
+.float-right,
 #hackerLogin,
 #logout {
   float: right;

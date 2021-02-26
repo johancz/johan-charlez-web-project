@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Random Fox Photos</title>
+  <title>Random Foxes taking the buss to see the stars</title>
   <!-- <link rel="preconnect" href="https://fonts.gstatic.com"> -->
   <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">  -->
   <!-- <link rel="stylesheet" href="easterEgg/easterEgg.css"> -->
@@ -15,11 +15,11 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="root-container"><!-- todo(joch): maybe remove the "id" -->
-    <!-- start of header -->
+  <div id="root-container">
+    <!-- start of <header> -->
     <header>
       <div id="logo">
-        <h1>Random <span>Fox</span> Photos</h1>
+        <h1><b>Random <span>foxes</span></b> waiting on the <b>bus</b> to go see the <b>stars</b></h1>
       </div>
       
       <nav id="nav-main">
@@ -34,41 +34,43 @@
         </ol>
       </nav>
     </header>
-    <!-- end of header -->
+    <!-- end of <header> -->
 
-    <!-- start of main -->
+    <!-- start of <main> -->
     <main>
       <button id="hackerLogin" class="hidden">I'm a hacker, sign-me in!</button>
       <button id="logout" class="hidden">Logout</button>
 
       <section id="container-homepage" class="page-container">
         <section id="page-home">
-          <h2>Home</h2>
-          <section>
-            <h3>Welcome...</h3>
-            <p>... to the final project in the "Web Development frontend" course in the "</p>
-          </section>
-          <section>
-            <h3>Project ideas:</h3>
-            <dl id="list-of-project-ideas">
-              <dt>Random location on Google Earth</dt>
-              <dd>Using Google Earth's API, randomize a location on earth and display it with an embed?</dd>
-            </dl>
-          </section>
+          <h2>Hello and welcome</h2>
+          <img src="./resources/images/fox.png" alt="A picure of a majestic fox." title="A majestic fox." class="float-right">
+          <h3>The purpose</h3>
+          <p>The purpose of this protype/draft is to present an idea of the structure and design and to serve as a demonstration and example of content, accesibility and responsiveness.</p>
+          <p>The website is optimized both for desktop and mobile devices.</p>
+          <p>Behind the scenes, the objective from the get go was to have semantically correct markup, facilitating ease of access (accesibility) while also leaving room for future expansion.</p>
+          
+          <h3>The APIs</h3>
+          <p>I decided to implement three APIs, and they all show different ways your API could be presented to the end user.</p>
+          <p>The first API implemented immediatelly show a random picture of a fox and a button to request a new picture.</p>
+          <p>The second API implements a live view of Västtrafik's different vehicles (busses, trams, trains and boats) painted as a dots ontop of a canvas. The canvas has a (for now) static map image of a part of Gothenburg. This implementation could be expanded with the ability zoom and pan around a real map.</p>
+          <p>Last but not least, I have implemented an interactive presentation of our Solar System's star and planets. Clicking on the planets or the sun will display a pop-up window with information requested from the third API.</p>
+
         </section>
       </section>
 
       <section id="container-other-pages" class="page-container"></section>
-      <!-- end of main -->
+      <!-- end of <main> -->
     </main>
 
-    <!-- start of footer -->
+    <!-- start of <footer> -->
     <footer>
-      Johan Charlez, 2021
-      <br>
-      Final Project in the course Webdevelopment frontend in the <a href="https://teknikhogskolan.se/utbildningar/net-utvecklare/">".NET-developer"-programme</a> @ <a href="https://teknikhogskolan.se/">Teknikhögskolan</a>.
+      <div>Made by Johan Charlez</div>
+      <div>2021</div>
+      <!-- <br> -->
+      <!-- Final Project in the course Webdevelopment frontend in the <a href="https://teknikhogskolan.se/utbildningar/net-utvecklare/">".NET-developer"-programme</a> @ <a href="https://teknikhogskolan.se/">Teknikhögskolan</a>. -->
     </footer>
-    <!-- start of footer -->
+    <!-- start of <footer> -->
   </div>
   <!-- end of #root-container -->
   
