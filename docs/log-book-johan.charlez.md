@@ -1,4 +1,9 @@
 # Log Book - johan.charlez
+## 2021-02-26 kl.02.19 (entry for 2020-02-25)
+- Merged all main development branches with main in PRs.
+- Implemented the [The Solar System OpenData API](https://api.le-systeme-solaire.net/en/) which mostly involved presenting the data in a nice way.
+  - The easiest way to draw the Sun and Planets would've have bene to draw on a `<canvas>`. But I have already worked a bit with `<canvas>` during the project (the Västtrafik API), and I figured that using regular html elements and CSS would make for an interesting challenge.
+- Finally I began the tasks of finalizing the styling and improving the website's responsiveness (the aim is to have the website functional down to 320px screens).
 ## 2021-02-24 kl.23.57
 - Made some final touches on the changes that were reverted yesterday and recommitted them.
 - Implemented the code for fetching a token from api.vasttrafik.se which is required to use their api.
