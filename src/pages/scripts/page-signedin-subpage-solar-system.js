@@ -5,10 +5,12 @@
     $ctx: undefined,
     $solarSystemContainer: undefined,
     $sunContainer: undefined,
-    $tooltip: undefined,
-    // the radii of the planets is given in thousands of km, this scales all bodies down so that at least the planets are 100% visible.
+    $infoPopup: undefined,
+    $infoPopupContents: undefined,
+    // the radii of the planets is given in thousands of km,
+    // this scales all bodies down so that at least the planets are 100% visible
+    // (except for the largest planets on small screens).
     bodiesScale: .005,
-    // largePlanets: ["Juptier", "Saturn", "Uranus", "Neptue"],
 
     async getData(parameters) {
       let response = await fetch(`https://api.le-systeme-solaire.net/rest/bodies${parameters}`);
@@ -16,8 +18,8 @@
     },
 
     drawSun(dataTheSun, scale = this.bodiesScale) {
-      console.log(dataTheSun.meanRadius, scale);
       $theSun = document.getElementById("the-sun");
+      $theSun.dataset.bodyData = JSON.stringify(dataTheSun);
 
       let meanDiameterScaled = dataTheSun.meanRadius *= 2 * scale;
       let offsetX = 0;
@@ -25,79 +27,64 @@
                        width: ${meanDiameterScaled}px;
                        left: ${meanDiameterScaled / -2}px;
                        top: -${meanDiameterScaled - 200}px;`;
-
-      this.$sunContainer.appendChild($theSun);
     },
 
     drawPlanet(planet, scale = this.bodiesScale) {
-      console.log(planet.meanRadius, scale);
       let meanDiameterScaled = planet.meanRadius *= 2 * scale;
 
       let $newPlanet = document.createElement("div");
       $newPlanet.id = "planet-" + planet.englishName.toLowerCase();
       $newPlanet.setAttribute("class", "sol-system-body sol-system-planet");
       $newPlanet.style = `height: ${meanDiameterScaled}px; width: ${meanDiameterScaled}px;`;
-      $newPlanet.dataset.planetName = planet.englishName;
+      $newPlanet.dataset.planetName = planet.englishName; // Used by $newPlanet's "::after" pseudo-element.
+      $newPlanet.dataset.bodyData = JSON.stringify(planet);
       $newPlanet.setAttribute("title", `Click for information about ${planet.englishName}`);
-
-      // todo(joch): handle the moons better, if the screen is small the "tooltip" with data overflows.
-      let moonMarkup = "";
-      if (planet.moons !== null) {
-        let moonsArray = planet.moons.map(moon => moon.moon);
-        let moonInfo = moonsArray.join(", ");
-        moonMarkup = `
-        <h5>Moons <span>(${planet.moons.length})</span>:</h5>
-        <p>${moonInfo}</p>
-        `;
-      }
-      
-      // todo(joch): optimize so we're only doing what's required when the element the bodies are drawn.
-      // planeInfo and moonMarkup above for instance be moved to things can be moved to the this.handleData()
-      let planetInfo =
-        `
-        <h4>${planet.englishName}</h4>
-        <h5>Information:</h5>
-        <table>
-          <tr>
-            <td>Semi Major Axis</td><td>${planet.semimajorAxis.toLocaleString()} km</td>
-          </tr>
-          <tr>
-            <td>Aphelion</td><td>${planet.aphelion.toLocaleString()} km</td>
-          </tr>
-          <tr>
-            <td>Perihelion</td><td>${planet.perihelion.toLocaleString()} km</td>
-          </tr>
-          <tr>
-            <td>Volume</td>
-            <td title="${(planet.vol.volValue * (10 ** planet.vol.volExponent)).toLocaleString()} km&sup3;">
-              ${planet.vol.volValue} x 10<sup>${planet.vol.volExponent}</sup> km&sup3;
-            </td>
-          </tr>
-          <tr>
-            <td>Density</td>
-            <td>${planet.density.toLocaleString()} g/cm<sup>3</sup></td>
-          </tr>
-          <tr>
-            <td>Gravity</td><td>${planet.gravity.toLocaleString()} m/s<sup>2</sup></td>
-          </tr>
-          <tr>
-            <td>Radius (mean)</td><td>${planet.meanRadius.toLocaleString()} km</td>
-          </tr>
-          <tr>
-            <td>Radius (at equator)</td><td>${planet.equaRadius.toLocaleString()} km</td>
-          </tr>
-          <tr>
-            <td>Radius (polar)</td><td>${planet.polarRadius.toLocaleString()} km</td>
-          </tr>
-          <tr>
-            <td>Axial Tilt</td><td>${planet.axialTilt} &deg;</td>
-          </tr>
-        </table>
-        ${moonMarkup}
-      `;
-      
-      $newPlanet.dataset.planetData = planetInfo;
       this.$solarSystemContainer.appendChild($newPlanet);
+    },
+
+    showCelestialBodyInfoPopup(celestialBody) {
+      console.log(celestialBody);
+      document.querySelector("#info-popup-planet-name").innerHTML = celestialBody.englishName;
+      document.querySelector("#planet-data-semi-major-axis").innerHTML = celestialBody.semimajorAxis.toLocaleString() + " km";
+      document.querySelector("#planet-data-aphelion").innerHTML = celestialBody.aphelion.toLocaleString() + " km";
+      document.querySelector("#planet-data-perihelion").innerHTML = celestialBody.perihelion.toLocaleString() + " km";
+
+      if (celestialBody.vol !== null && celestialBody.vol.volValue !== null && celestialBody.vol.volExponent !== null) {
+      document.querySelector("#planet-data-volume").innerHTML = `${celestialBody.vol.volValue} x 10<sup>${celestialBody.vol.volExponent}</sup> km&sup3`;
+      document.querySelector("#planet-data-volume").title = `${(celestialBody.vol.volValue * (10 ** celestialBody.vol.volExponent)).toLocaleString()} km&sup3;`;
+      }
+
+      document.querySelector("#planet-data-density").innerHTML = celestialBody.density.toLocaleString() + " g/cm<sup>3</sup>";
+      document.querySelector("#planet-data-gravity").innerHTML = celestialBody.gravity.toLocaleString() + " m/s<sup>2</sup>";
+      document.querySelector("#planet-data-radius-mean").innerHTML = celestialBody.meanRadius.toLocaleString() + " km";
+      document.querySelector("#planet-data-radius-equator").innerHTML = celestialBody.equaRadius.toLocaleString() + " km";
+      document.querySelector("#planet-data-radius-polar").innerHTML = celestialBody.polarRadius.toLocaleString() + " km";
+      document.querySelector("#planet-data-axial-tilt").innerHTML = celestialBody.axialTilt + "&deg;";
+
+      if (celestialBody.moons !== null) {
+        document.querySelector("#info-popup-moon-count").innerHTML = celestialBody.moons.length;
+        document.querySelector("#info-popup-moon-data").innerHTML = celestialBody.moons.map(moon => moon.moon).join(", ");
+      }
+    
+      this.$infoPopup.classList.remove("hidden");
+    },
+
+    hideCelestialBodyInfoPopup() {
+      this.$infoPopup.classList.add("hidden");
+      document.querySelector("#info-popup-planet-name").innerHTML = "";
+      document.querySelector("#planet-data-semi-major-axis").innerHTML = "";
+      document.querySelector("#planet-data-aphelion").innerHTML = "";
+      document.querySelector("#planet-data-perihelion").innerHTML = "";
+      document.querySelector("#planet-data-volume").innerHTML = "";
+      document.querySelector("#planet-data-volume").title = "";
+      document.querySelector("#planet-data-density").innerHTML = "";
+      document.querySelector("#planet-data-gravity").innerHTML = "";
+      document.querySelector("#planet-data-radius-mean").innerHTML = "";
+      document.querySelector("#planet-data-radius-equator").innerHTML = "";
+      document.querySelector("#planet-data-radius-polar").innerHTML = "";
+      document.querySelector("#planet-data-axial-tilt").innerHTML = "";
+      document.querySelector("#info-popup-moon-count").innerHTML = "";
+      document.querySelector("#info-popup-moon-data").innerHTML = "";
     },
 
     async handleData() {
@@ -115,28 +102,28 @@
       theSun = theSun.bodies[0];
       console.log("theSun:", theSun);
       
-      // Draw the celestial bodies.
+      // Create and draw the sun's element.
       this.drawSun(theSun);
 
+      // Create and draw planet-elements.
       for (let planet of planetaryBodies.bodies) {
         this.drawPlanet(planet);
       }
 
       // Open a popup-window when a planet is clicked containting information about it. 
       this.$solarSystemContainer.addEventListener("click", e => {
-        if (e.target.classList.contains("sol-system-planet")) {
+        // if (e.target.classList.contains("sol-system-planet")) {
+        if (e.target.classList.contains("sol-system-body")) {
           let $planet = e.target;
-          let $tooltipContents = this.$tooltip.querySelector("#tooltip-contents");
 
-          document.querySelector("#tooltip-close-button").addEventListener("click", e => {
-              this.$tooltip.classList.add("hidden");
-              $tooltipContents.innerHTML = "";
+          document.querySelector("#info-popup-close-button").addEventListener("click", e => {
+              this.hideCelestialBodyInfoPopup();
           },
           {
-            once: true // The event should only fire.
+            once: true // The event is only needed once.
           });
-          $tooltipContents.innerHTML = $planet.dataset.planetData;
-          this.$tooltip.classList.remove("hidden");
+
+          this.showCelestialBodyInfoPopup(JSON.parse($planet.dataset.bodyData));
         }
       });
     },
@@ -144,7 +131,8 @@
     init() {
       this.$solarSystemContainer = document.querySelector("#solar-system-container");
       this.$sunContainer = document.querySelector("#the-sun-container");
-      this.$tooltip = document.querySelector("#tooltip");
+      this.$infoPopup = document.querySelector("#info-popup");
+      this.$infoPopupContents = this.$infoPopup.querySelector("#info-popup-contents");
       this.handleData();
     }
   };

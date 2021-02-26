@@ -214,6 +214,10 @@ span {
   display: inline-block;
 }
 
+/********************/
+/* Solar System API */
+/********************/
+
 #random-fox {
   /* float: right; */
   max-width: calc(100% + 40px);
@@ -224,9 +228,9 @@ span {
   border-color: gray;
 }
 
-/*****************/
+/********************/
 /* Solar System API */
-/*****************/
+/********************/
 
 #solar-system-container {
   overflow: hidden;
@@ -236,6 +240,10 @@ span {
 
 .sol-system-body {
   border-radius: 50%;
+}
+.sol-system-body:hover {
+  cursor: pointer;
+  border: 2px solid black;
 }
 
 #the-sun-container {
@@ -256,6 +264,7 @@ span {
 }
 #the-sun:hover {
   background-color: orangered;
+  border-color: orangered;
 }
 #the-sun-header {
   position: absolute;
@@ -265,16 +274,16 @@ span {
   font-size: 2em;
   font-family: sans-serif;
   color: white;
+  transition: font-size .5s ease-in-out;
+}
+#the-sun:hover + #the-sun-header {
+  font-size: 3em;
 }
 
 .sol-system-planet {
   position: relative;
   margin: 50px auto 0;
   background-color: black;
-}
-.sol-system-planet:hover {
-  cursor: pointer;
-  border: 2px solid black;
 }
 .sol-system-planet::after {
   content: attr(data-planet-name);
@@ -331,19 +340,31 @@ span {
   color: white;
 }
 
-#tooltip {
+#info-popup {
   position: fixed;
-  /* note(joch): the folow 2 rules are temporary? */
-  left: 50%;
-  top: 50%;
+  left: 50vw;
+  top: 50vh;
   transform: translate(-50%, -50%);
   background-color: whitesmoke;
   border: 1px solid black;
   border-radius: 10px;
   padding: 10px;
   z-index: 1000;
+  max-height: 100%;
 }
-#tooltip-close-button {
+#info-popup-contents {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+#info-popup-content > * {
+  flex: 1 1 auto;
+}
+#info-popup-moon-data {
+  overflow-y: auto;
+  flex: 1 1 auto;
+}
+#info-popup-close-button {
   margin-top: 20px;
   padding: 10px;
   cursor: pointer;
@@ -354,7 +375,7 @@ span {
   font-size: 1.2em;
   font-weight: bold;
 }
-#tooltip-close-button:hover {
+#info-popup-close-button:hover {
   background-color: orange;
 }
 
@@ -400,8 +421,24 @@ Divide this value by -2 because we're offsetting the planet from the left edge o
   }
 }
 
+@media only screen and (max-width: 1000px) {
+  #info-popup {
+    left: 10%;
+    transform: translateY(-50%);
+    width: 80%;
+  }
+}
+
 @media only screen and (max-width: 400px) {
   #nav-main li {
     display: block;
+  }
+
+  #info-popup {
+    left: 10px;
+    top: 10px;
+    bottom: 10px;
+    transform: none;
+    width: calc(100% - 20px);
   }
 }

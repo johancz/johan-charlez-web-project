@@ -5,12 +5,13 @@
     <button id="get-random-fox" data-label="Fox it up please!" disabled>Fox it up please!</button>
     <br>
     <img src="//:0" id="random-fox" alt="Picture of fox/foxes" title="Picture of fox/foxes">
-    <p><b>P.S.</b> Is this a random picture of a fox, a picure of a random fox, or a random picture of a random fox? You decide.</p>
+    <p><b>P.S.</b> Is this a random picture of a fox, a picure of a random fox, or a random picture of a random fox? You
+      decide.</p>
   </section>
-  
+
   <section id="section-api-solar-system">
     <h3>The Solar System OpenData</h3>
-    
+
     <h4>How to use:</h4>
     <p>Click on a planet or the sun for some information about the body.</p>
     <div id="solar-system-container">
@@ -19,13 +20,51 @@
         <h4 id="the-sun-header">The Sun</h4>
       </div>
     </div>
-    
-    <div id="tooltip" class="hidden">
-      <div id="tooltip-contents"></div>
-      <button type="button" id="tooltip-close-button">Close</button>
+
+    <div id="info-popup" class="hidden">
+      <div id="info-popup-contents">
+        <h4 id="info-popup-planet-name"></h4>
+        
+        <h5>Information:</h5>
+        <table>
+          <tr>
+            <td>Semi Major Axis</td><td id="planet-data-semi-major-axis"></td>
+          </tr>
+          <tr>
+            <td>Aphelion</td><td id="planet-data-aphelion"></td>
+          </tr>
+          <tr>
+            <td>Perihelion</td><td id="planet-data-perihelion"></td>
+          </tr>
+          <tr>
+            <td>Volume</td><td id="planet-data-volume" title=""></td>
+          </tr>
+          <tr>
+            <td>Density</td><td id="planet-data-density"></td>
+          </tr>
+          <tr>
+            <td>Gravity</td><td id="planet-data-gravity"></td>
+          </tr>
+          <tr>
+            <td>Radius (mean)</td><td id="planet-data-radius-mean"></td>
+          </tr>
+          <tr>
+            <td>Radius (at equator)</td><td id="planet-data-radius-equator"></td>
+          </tr>
+          <tr>
+            <td>Radius (polar)</td><td id="planet-data-radius-polar"></td>
+          </tr>
+          <tr>
+            <td>Axial Tilt</td><td id="planet-data-axial-tilt"></td>
+          </tr>
+        </table>
+        
+        <h5>Moons <span id="info-popup-moon-count"></h5>
+        <button type="button" id="info-popup-close-button">Close</button>
+      </div>
     </div>
   </section>
-  
+
   <section id="section-api-vasttrafik-livemap">
     <h3>Live map of some of Västtrafik's vehicles.</h3>
     <canvas id="canvas-vasttrafik-livemap"></canvas>
