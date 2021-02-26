@@ -1,5 +1,17 @@
 <div id="logged-in">
-  <section id="section-api-random-fox">
+  <h3>Choose API implementation:</h3>
+
+  <!-- Tabs -->
+  <div id="tabs">
+    <button type="button" class="tab" data-selected-tab="true" data-tab-content-id="section-api-random-fox">the "Random Fox" API</button>
+    <button type="button" class="tab" data-selected-tab="false" data-tab-content-id="section-api-solar-system">The Solar System API</button>
+    <button type="button" class="tab" data-selected-tab="false" data-tab-content-id="section-api-vasttrafik-livemap">Västtrafik's livemap API</button>
+    <hr>
+  </div>
+  
+  <!-- Content -->
+  <!-- The "Random Fox" API -->
+  <section id="section-api-random-fox" class="tab-content">
     <h3>Project Random Fox</h3>
     <p>You click the button, I give you a random fox, deal?</p>
     <button id="get-random-fox" data-label="Fox it up please!" disabled>Fox it up please!</button>
@@ -9,7 +21,8 @@
       decide.</p>
   </section>
 
-  <section id="section-api-solar-system">
+  <!-- The Solar System API -->
+  <section id="section-api-solar-system" class="tab-content hidden">
     <h3>The Solar System OpenData</h3>
 
     <h4>How to use:</h4>
@@ -25,38 +38,19 @@
       <div id="info-popup-contents">
         <h4 id="info-popup-planet-name"></h4>
         
-        <h5>Information:</h5>
+        <!-- <h5>Information:</h5> -->
         <table>
-          <tr>
-            <td>Semi Major Axis</td><td id="planet-data-semi-major-axis"></td>
-          </tr>
-          <tr>
-            <td>Aphelion</td><td id="planet-data-aphelion"></td>
-          </tr>
-          <tr>
-            <td>Perihelion</td><td id="planet-data-perihelion"></td>
-          </tr>
-          <tr>
-            <td>Volume</td><td id="planet-data-volume" title=""></td>
-          </tr>
-          <tr>
-            <td>Density</td><td id="planet-data-density"></td>
-          </tr>
-          <tr>
-            <td>Gravity</td><td id="planet-data-gravity"></td>
-          </tr>
-          <tr>
-            <td>Radius (mean)</td><td id="planet-data-radius-mean"></td>
-          </tr>
-          <tr>
-            <td>Radius (at equator)</td><td id="planet-data-radius-equator"></td>
-          </tr>
-          <tr>
-            <td>Radius (polar)</td><td id="planet-data-radius-polar"></td>
-          </tr>
-          <tr>
-            <td>Axial Tilt</td><td id="planet-data-axial-tilt"></td>
-          </tr>
+          <caption>Information:</caption>
+          <tr><td>Semi Major Axis</td><td id="planet-data-semi-major-axis"></td></tr>
+          <tr><td>Aphelion</td><td id="planet-data-aphelion"></td></tr>
+          <tr><td>Perihelion</td><td id="planet-data-perihelion"></td></tr>
+          <tr><td>Volume</td><td id="planet-data-volume" title=""></td></tr>
+          <tr><td>Density</td><td id="planet-data-density"></td></tr>
+          <tr><td>Gravity</td><td id="planet-data-gravity"></td></tr>
+          <tr><td>Radius (mean)</td><td id="planet-data-radius-mean"></td></tr>
+          <tr><td>Radius (at equator)</td><td id="planet-data-radius-equator"></td></tr>
+          <tr><td>Radius (polar)</td><td id="planet-data-radius-polar"></td></tr>
+          <tr><td>Axial Tilt</td><td id="planet-data-axial-tilt"></td></tr>
         </table>
         
         <h5>Moons <span id="info-popup-moon-count"></span></h5>
@@ -67,7 +61,8 @@
     </div>
   </section>
 
-  <section id="section-api-vasttrafik-livemap">
+  <!-- Västtrafik's livemap API -->
+  <section id="section-api-vasttrafik-livemap" class="tab-content hidden">
     <h3>Live map of some of Västtrafik's vehicles.</h3>
     <canvas id="canvas-vasttrafik-livemap"></canvas>
   </section>

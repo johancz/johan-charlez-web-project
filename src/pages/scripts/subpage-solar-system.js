@@ -51,7 +51,7 @@
 
       if (celestialBody.vol !== null && celestialBody.vol.volValue !== null && celestialBody.vol.volExponent !== null) {
       document.querySelector("#planet-data-volume").innerHTML = `${celestialBody.vol.volValue} x 10<sup>${celestialBody.vol.volExponent}</sup> km&sup3`;
-      document.querySelector("#planet-data-volume").title = `${(celestialBody.vol.volValue * (10 ** celestialBody.vol.volExponent)).toLocaleString()} km&sup3;`;
+      document.querySelector("#planet-data-volume").title = `${(celestialBody.vol.volValue * (10 ** celestialBody.vol.volExponent)).toLocaleString()} km³`;
       }
 
       document.querySelector("#planet-data-density").innerHTML = celestialBody.density.toLocaleString() + " g/cm<sup>3</sup>";

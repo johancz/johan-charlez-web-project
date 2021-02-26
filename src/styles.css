@@ -1,7 +1,4 @@
-/********************/
-/* Resets and Setup */
-/********************/
-
+/* -------------- Resets and Setup -------------- */
 :root {
   --separator-color: orangered;
   --hex-pattern-background-color: rgb(236, 235, 235);
@@ -15,10 +12,7 @@
   font-family: 'Roboto', sans-serif;
 }
 
-/******************/
-/* General styles */
-/******************/
-
+/* -------------- General styles -------------- */
 .hidden {
   display: none;
 }
@@ -27,35 +21,35 @@ button {
   margin: 10px 0;
   padding: 10px;
   cursor: pointer;
-  background-color: lightgray;
-  border: 2px solid orangered;
+  background-color: #ddd;
+  border: 2px solid lightsalmon;
+  box-shadow: orangered 0 0 2px;
   border-radius: 8px;
   font-size: 1.1em;
   font-weight: 300;
 }
+button:hover {
+  border-color: orangered;
+}
 
-/***************************/
-/* Element specific styles */
-/***************************/
-
+/* -------------- Element specific styles -------------- */
 html, body {
   height: 100%;
 }
-
 html {
   /*
   The following two lines stop the contents of the page from moving horizontally when a scrollbar on <body> is toggled.
     - source: https://aykevl.nl/2014/09/fix-jumping-scrollbar
   */
-  /* margin-left: calc(100vw - 100%); */
-  /* margin-right: 0; */
+  margin-left: calc((100vw - 100%));
+  margin-right: 0;
 }
-
 body {
   background-color: whitesmoke;
   background-color: rgb(240, 240, 240);
   font-size: 17px;
 }
+
 hr.vertical {
   display: inline;
   margin: 0 8px;
@@ -114,7 +108,7 @@ legend {
   margin-left: 20px;
 }
 
-
+/* -------------- Header -------------- */
 header {
   background-image: url("./resources/background-images/89baaec3227c63044d8d715b7388f8b7.png");
   background-repeat: no-repeat;
@@ -122,10 +116,12 @@ header {
   padding-bottom: 10px;
   position: relative;
 }
+
+/* -------------- The Main Menu -------------- */
 nav {
-  
   position: relative;
 }
+/* This is the transparent horizontal background behind the main menu */
 nav:after {
   pointer-events: none;
   position: absolute;
@@ -138,9 +134,7 @@ nav:after {
   bottom: 0;
   z-index: 1;
 }
-/*** Main Menu ***/
 #nav-main {
-  /* font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
   font-size: 1.5em;
@@ -161,22 +155,20 @@ nav:after {
   color: inherit;
   padding: 5px;
 }
-/* #nav-main li:not(:first-child) { */
-  /* border-left: 1px solid var(--separator-color); */
-/* } */
 #nav-main:hover {
   cursor: pointer;
 }
 #nav-main li:hover {
-  /* text-shadow: 0 0 20px var(--separator-color); */
   text-shadow: 0 0 5px white;
-  transition: text-shadow 1s;
+  color: black;
 }
 
+/* -------------- Main -------------- */
 main {
   flex: 1;
 }
 
+/* -------------- Footer -------------- */
 footer {
   display: flex;
   flex-direction: row;
@@ -188,7 +180,7 @@ footer > div:nth-child(2) > div {
   text-align: right;
 }
 
-/* Headers */
+/* -------------- Headers -------------- */
 h1, h2, h3 {
   margin: 20px 0 10px;
   font-family: 'Roboto', sans-serif;
@@ -198,16 +190,11 @@ h1 {
   font-weight: 100;
   text-transform: capitalize;
 }
-
 h2, h3 {
   font-weight: 300;
   color: var(--separator-color);
 }
-/* h1::first-letter { */
-/* } */
-/* h1 > span::first-letter { */
 h1 span {
-  /* font-weight: 300; */
   color: var(--separator-color);
 }
 h1 > b {
@@ -224,7 +211,6 @@ h4, h5 {
 
 #logo {
   padding: 10px;
-  /* overflow: hidden; */
 }
 
 span {
@@ -245,10 +231,34 @@ span {
   margin: 0 20px 20px;
 }
 
-/********************/
-/* Solar System API */
-/********************/
+#tabs > hr {
+  background-color: black;
+  border: none;
+  height: 2px;
+  width: calc(100% + 40px);
+  margin-left: -20px;
+}
+.tab {
+  margin: 0;
+  border-width: 1px 1px 0;
+  border-radius: 0;
+  border-style: solid;
+  border-color: black;
+  box-shadow: none;
+  border-bottom: 2px solid black;
+  margin-bottom: -2px;
+}
+.tab[data-selected-tab="true"],
+.tab:hover {
+  /* background-color: rgba(255, 69, 0, .1); */
+  border-color: orangered;
+}
+.tab[data-selected-tab="true"] {
+  border-color: orangered;
+  background-color: rgba(255, 69, 0, .1);
+}
 
+/* -------------- "Random Fox" API -------------- */
 #random-fox {
   /* float: right; */
   max-width: calc(100% + 40px);
@@ -259,10 +269,7 @@ span {
   border-color: gray;
 }
 
-/********************/
-/* Solar System API */
-/********************/
-
+/* -------------- The Solar System API -------------- */
 #solar-system-container {
   overflow: hidden;
   position: relative;
@@ -371,6 +378,7 @@ span {
   color: white;
 }
 
+/* -------------- The Solar System API - info-pop -------------- */
 #info-popup {
   position: fixed;
   left: 50vw;
@@ -410,10 +418,7 @@ span {
   background-color: orange;
 }
 
-/***********************/
-/* Okta sign-in widget */
-/***********************/
-
+/* -------------- The Okta sign-in widget -------------- */
 /* Hide the header since I don't plan on using it. */
 .okta-sign-in-header.auth-header {
   display: none;
@@ -430,10 +435,7 @@ span {
   float: right;
 }
 
-/*****************/
-/* Media Queries */
-/*****************/
-
+/* -------------- Media Queries -------------- */
 /*
 When the screen-width <= Jupter's width center the planet with '(100% - 100vw) / -2'
 which calculates how many pixels wider the planet is than the width of the viewport.
@@ -474,5 +476,17 @@ Divide this value by -2 because we're offsetting the planet from the left edge o
     bottom: 10px;
     transform: none;
     width: calc(100% - 20px);
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  #root-container {
+    /*
+    The following two lines stop the contents of the page from moving horizontally when a scrollbar on <body> is toggled.
+      - source: https://aykevl.nl/2014/09/fix-jumping-scrollbar
+    */
+    /* Undo the above when the page is too narrow. */
+    margin-left: 0;
+    margin-right: 0;
   }
 }
