@@ -1,4 +1,17 @@
 # Log Book - johan.charlez
+## 2021-02-27 kl.00.21 (entry for 2020-02-26)
+- Made the final touches to styling and markup.
+- Fixes a bunch of small bugs in various files, but nothing northworthy.
+- General cleanup in all files, cleaning out comments, dead code, "todo" and "note" comments.
+- Cleaned up the src-directory.
+  - Removed old files, experiments and backups and anything which should not be included in the ".zip"-file when submitting the project.
+  - Renamed some of the pages and script files so that they make more sense and I shortened the filenames for on the script files for the "subpages" (these are the 3 script files containing the API implementations).
+- I moved the Okta sign out button so that it is visible and functional on all pages.
+- Added a basic tab-interface to control the visibility of the 3 API implementations so that only one API is shown at a time.
+- Fixed a responsive design issue where the Västtrafik livemap canvas didn't scale down for smaller screens.
+- Added the markup for importing the "Roboto" font from Google Fonts.
+- Added a favicon.
+- I recordeded the videopresentation (as 3 files) and uploaded it to Gustav Nyberg on Teams.
 ## 2021-02-26 kl.02.19 (entry for 2020-02-25)
 - Merged all main development branches with main in PRs.
 - Implemented the [The Solar System OpenData API](https://api.le-systeme-solaire.net/en/) which mostly involved presenting the data in a nice way.
